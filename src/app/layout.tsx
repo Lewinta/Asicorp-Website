@@ -1,0 +1,62 @@
+import type { Metadata } from "next";
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { siteConfig } from "@/lib/site";
+import { Providers } from "@/components/providers";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import "./globals.css";
+
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "factoring",
+    "cuentas por cobrar",
+    "liquidez",
+    "sector salud",
+    "ARS",
+    "facturación electrónica",
+    "República Dominicana",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "es_DO",
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description: siteConfig.description,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="es" suppressHydrationWarning>
+      <body className={`${display.variable} ${sans.variable} antialiased`}>
+        <Providers>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </Providers>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  ASICORP design tokens.
+  Azul corporativo del logo (#2C59A4), carbón (#3E3E40) y verde de "liquidez".
+*/
+:root {
+  --background: #fbfcfe;
+  --foreground: #1b2330;
+
+  --card: #ffffff;
+  --card-foreground: #1b2330;
+
+  --muted: #eef2f8;
+  --muted-foreground: #586679;
+
+  --border: #e2e8f2;
+  --input: #e2e8f2;
+
+  --primary: #2c59a4;
+  --primary-foreground: #ffffff;
+
+  --secondary: #16306b;
+  --secondary-foreground: #ffffff;
+
+  --accent: #18a558;
+  --accent-foreground: #ffffff;
+
+  --ring: #2c59a4;
+
+  --success: #18a558;
+  --danger: #d14343;
+
+  /* Marca cruda para gradientes y degradados */
+  --brand-blue: #2c59a4;
+  --brand-blue-bright: #3a72d4;
+  --brand-navy: #16306b;
+  --brand-ink: #3e3e40;
+  --brand-tint: #dce6f6;
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #091223;
+  --foreground: #e7ecf5;
+
+  --card: #0f1d33;
+  --card-foreground: #e7ecf5;
+
+  --muted: #16263f;
+  --muted-foreground: #93a3bc;
+
+  --border: #1f3457;
+  --input: #25406a;
+
+  --primary: #5b8ee0;
+  --primary-foreground: #04122b;
+
+  --secondary: #2a4f8f;
+  --secondary-foreground: #ffffff;
+
+  --accent: #2bd07f;
+  --accent-foreground: #04140a;
+
+  --ring: #5b8ee0;
+
+  --success: #2bd07f;
+  --danger: #f06868;
+
+  --brand-blue: #3a6fc4;
+  --brand-blue-bright: #5b8ee0;
+  --brand-navy: #16306b;
+  --brand-ink: #c8cdd6;
+  --brand-tint: #16263f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-bright: var(--brand-blue-bright);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-tint: var(--brand-tint);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 0.15rem);
+  --radius-sm: calc(var(--radius) - 0.35rem);
+  --radius-xl: calc(var(--radius) + 0.4rem);
+  --radius-2xl: calc(var(--radius) + 0.9rem);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: initial;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background-color: color-mix(in srgb, var(--primary) 20%, transparent);
+    color: var(--foreground);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Utilidades de marca */
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+}
+
+@utility text-gradient-brand {
+  background-image: linear-gradient(100deg, var(--brand-navy), var(--brand-blue) 55%, var(--brand-blue-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background-color: color-mix(in srgb, var(--card) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+@utility grid-texture {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility dot-texture {
+  background-image: radial-gradient(color-mix(in srgb, var(--primary) 18%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility shadow-soft {
+  box-shadow: 0 1px 2px rgb(16 32 64 / 0.04), 0 10px 30px -12px rgb(16 32 64 / 0.14);
+}
+@utility shadow-lift {
+  box-shadow: 0 24px 60px -22px rgb(44 89 164 / 0.32);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+}
+.animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float-slow {
+    animation: none;
+  }
+}
