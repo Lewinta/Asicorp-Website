@@ -62,7 +62,7 @@ export default function NosotrosPage() {
                 sector salud dominicano y del proceso de cobro a las aseguradoras.
               </p>
               <p>
-                Más allá de comprar facturas, nos convertimos en el aliado integral
+                Más allá de adelantarte el dinero de tus facturas, nos convertimos en el aliado integral
                 que ordena tus finanzas, cumple tus obligaciones y te acompaña a
                 crecer con tranquilidad.
               </p>

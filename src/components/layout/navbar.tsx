@@ -140,7 +140,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden lg:hidden"
+            className="overflow-hidden border-b border-border bg-background/95 shadow-soft backdrop-blur-md lg:hidden"
           >
             <div className="container-page mx-auto max-w-7xl px-5 pb-6 pt-2">
               <ul className="flex flex-col gap-1">

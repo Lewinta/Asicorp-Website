@@ -89,7 +89,7 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="container-page mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-6 text-xs text-muted-foreground md:flex-row md:px-8">
           <p>© {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.</p>
-          <p>Soluciones financieras para el sector salud · RNC {"{{RNC}}"}</p>
+          <p>Soluciones financieras para el sector salud</p>
         </div>
       </div>
     </footer>

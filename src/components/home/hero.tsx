@@ -44,9 +44,9 @@ export function Hero() {
             transition={{ duration: 0.8, ease, delay: 0.16 }}
             className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground"
           >
-            No esperes meses para cobrar a las ARS. En Asicorp adquirimos tus
-            facturas del sector salud y te entregamos el efectivo hoy, con un proceso
-            100% digital y sin aumentar tu deuda bancaria.
+            No esperes meses para cobrar a las ARS. En Asicorp te adelantamos el
+            dinero de tus facturas del sector salud y te entregamos el efectivo hoy,
+            con un proceso 100% digital y sin aumentar tu deuda bancaria.
           </motion.p>
 
           <motion.div

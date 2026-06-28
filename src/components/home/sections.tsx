@@ -155,7 +155,7 @@ export function Sectores() {
 
 const pasos = [
   { icon: FileText, n: "01", title: "Facturas a la ARS", desc: "Prestas tu servicio de salud y emites la factura a la aseguradora." },
-  { icon: Handshake, n: "02", title: "Asicorp adquiere el crédito", desc: "Evaluamos y compramos tu cuenta por cobrar de forma transparente." },
+  { icon: Handshake, n: "02", title: "Asicorp adelanta tu dinero", desc: "Evaluamos tu cuenta por cobrar y te adelantamos el dinero de forma transparente." },
   { icon: Banknote, n: "03", title: "Recibes tu dinero", desc: "Te entregamos el efectivo de inmediato, en 24 a 72 horas." },
   { icon: Headset, n: "04", title: "Gestionamos el cobro", desc: "Nosotros nos encargamos de cobrarle a la ARS por ti." },
 ];
@@ -216,7 +216,7 @@ export function PorQueAsicorp() {
               ¿Por qué Asicorp?
             </span>
             <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
-              No solo compramos facturas. Somos tu aliado financiero integral.
+              No solo adelantamos tu dinero. Somos tu aliado financiero integral.
             </h2>
             <p className="mt-4 max-w-md text-white/80">
               Más allá del factoring, ponemos a tu disposición todo lo que tu

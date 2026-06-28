@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const factoringPuntos = [
-  "Adquirimos tus facturas pendientes a las ARS.",
+  "Te adelantamos el dinero de tus facturas pendientes a las ARS.",
   "Te adelantamos hasta el 90% del valor en 24–72 horas.",
   "No es un préstamo: no aumenta tu deuda bancaria.",
   "Nosotros gestionamos el cobro a la aseguradora.",
