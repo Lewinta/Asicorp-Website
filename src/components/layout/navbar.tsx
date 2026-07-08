@@ -38,7 +38,11 @@ export function Navbar() {
       )}
     >
       <nav className="container-page mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8">
-        <Link href="/" aria-label="ASICORP inicio">
+        <Link
+          href="/"
+          aria-label="ASICORP inicio"
+          className={cn(pathname === "/" && "max-sm:hidden")}
+        >
           <Logo compact={scrolled} />
         </Link>
 

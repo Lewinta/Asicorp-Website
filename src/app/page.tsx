@@ -18,8 +18,6 @@ export default function Home() {
       </SnapSection>
       <SnapSection>
         <EjemploReal />
-      </SnapSection>
-      <SnapSection>
         <StatsBand />
       </SnapSection>
       <SnapSection>
