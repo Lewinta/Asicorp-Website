@@ -23,7 +23,7 @@ type RevealProps = {
   once?: boolean;
 };
 
-export function Reveal({ children, className, delay = 0, y = 26, once = true }: RevealProps) {
+export function Reveal({ children, className, delay = 0, y = 26, once = false }: RevealProps) {
   return (
     <motion.div
       className={className}
@@ -37,14 +37,22 @@ export function Reveal({ children, className, delay = 0, y = 26, once = true }: 
   );
 }
 
-export function StaggerGroup({ children, className }: { children: ReactNode; className?: string }) {
+export function StaggerGroup({
+  children,
+  className,
+  once = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  once?: boolean;
+}) {
   return (
     <motion.div
       className={className}
       variants={stagger}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once, margin: "-80px" }}
     >
       {children}
     </motion.div>
