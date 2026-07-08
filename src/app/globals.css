@@ -115,6 +115,17 @@ html.lenis body {
   overflow: clip;
 }
 
+html {
+  /* Snapped section tops clear the fixed navbar (~5rem tall). */
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-snap-section] {
+    min-height: 0;
+  }
+}
+
 /* Utilidades de marca */
 @utility container-page {
   width: 100%;
