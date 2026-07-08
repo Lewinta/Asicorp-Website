@@ -8,18 +8,35 @@ import {
   Sectores,
   StatsBand,
 } from "@/components/home/sections";
+import { SnapSection } from "@/components/motion/snap-section";
 
 export default function Home() {
   return (
     <>
-      <HeroFoto />
-      <EjemploReal />
-      <StatsBand />
-      <Benefits />
-      <Sectores />
-      <ComoFunciona />
-      <PorQueAsicorp />
-      <CTASection />
+      <SnapSection>
+        <HeroFoto />
+      </SnapSection>
+      <SnapSection>
+        <EjemploReal />
+      </SnapSection>
+      <SnapSection>
+        <StatsBand />
+      </SnapSection>
+      <SnapSection>
+        <Benefits />
+      </SnapSection>
+      <SnapSection>
+        <Sectores />
+      </SnapSection>
+      <SnapSection>
+        <ComoFunciona />
+      </SnapSection>
+      <SnapSection>
+        <PorQueAsicorp />
+      </SnapSection>
+      <SnapSection>
+        <CTASection />
+      </SnapSection>
     </>
   );
 }
