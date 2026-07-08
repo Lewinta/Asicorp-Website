@@ -253,7 +253,7 @@ export function CTASection() {
     <section className="container-page mx-auto max-w-7xl px-5 pt-16 md:px-8">
       <Reveal>
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card px-7 py-16 text-center md:px-16 md:py-20">
-          <div className="pointer-events-none absolute inset-0 dot-texture opacity-50" />
+          <div className="pointer-events-none absolute inset-0 line-texture opacity-50" />
           <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--brand-blue)_0%,transparent_65%)] opacity-15 blur-2xl" />
           <div className="relative z-10 mx-auto max-w-2xl">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">

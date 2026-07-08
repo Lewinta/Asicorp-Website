@@ -1,4 +1,5 @@
-import { Hero } from "@/components/home/hero";
+import { HeroFoto } from "@/components/home/hero-foto";
+import { EjemploReal } from "@/components/home/ejemplo-real";
 import {
   Benefits,
   CTASection,
@@ -11,7 +12,8 @@ import {
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroFoto />
+      <EjemploReal />
       <StatsBand />
       <Benefits />
       <Sectores />

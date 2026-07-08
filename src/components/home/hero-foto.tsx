@@ -1,13 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowRight, BadgeCheck, Clock, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Clock,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+  Calculator,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatRD } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export function Hero() {
+export function HeroFoto() {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       {/* atmósfera */}
@@ -82,7 +90,7 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Tarjeta visual */}
+        {/* Foto */}
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -90,49 +98,31 @@ export function Hero() {
           className="relative"
         >
           <div className="absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_70%_20%,var(--brand-blue),transparent_60%)] opacity-20 blur-2xl" />
-          <div className="relative rounded-3xl border border-border bg-card p-6 shadow-lift md:p-7">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-muted-foreground">
-                Tu factura a la ARS
-              </span>
-              <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
-                Pendiente 90 días
-              </span>
-            </div>
-            <p className="mt-2 font-display text-3xl font-extrabold text-foreground">
-              {formatRD(500000)}
-            </p>
 
-            <div className="my-5 flex items-center gap-3">
-              <div className="h-px flex-1 bg-border" />
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                Asicorp adelanta <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-              <div className="h-px flex-1 bg-border" />
-            </div>
-
-            <div className="rounded-2xl bg-primary p-5 text-primary-foreground">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-primary-foreground/80">Recibes hoy</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold">
-                  <BadgeCheck className="h-3.5 w-3.5" /> Aprobado en 48h
-                </span>
-              </div>
-              <p className="mt-1 font-display text-3xl font-extrabold">{formatRD(450000)}</p>
-            </div>
-
-            <div className="mt-4 flex items-center gap-2 text-sm text-success">
-              <BadgeCheck className="h-4 w-4" /> Nosotros gestionamos el cobro a la ARS por ti.
-            </div>
+          <div className="relative aspect-[2136/1506] w-full overflow-hidden rounded-3xl border border-border bg-card shadow-lift">
+            <Image
+              src="/asicorp_banner.jpg"
+              alt="Estetoscopio, calculadora y la firma de un acuerdo: factoring médico y comercial de Asicorp"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
+            />
           </div>
 
+          {/* Chip flotante: los dos tipos de factoring */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.7, duration: 0.6, ease }}
-            className="absolute -right-3 -top-3 hidden animate-float-slow rounded-2xl border border-border glass px-4 py-2 text-sm font-semibold text-foreground shadow-soft md:block"
+            className="absolute -bottom-4 -right-3 hidden animate-float-slow rounded-2xl border border-border glass px-4 py-3 shadow-soft md:block"
           >
-            +90% de adelanto
+            <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+              <Stethoscope className="h-4 w-4 text-primary" /> Factoring médico
+            </p>
+            <p className="mt-1.5 flex items-center gap-2 text-sm font-semibold text-foreground">
+              <Calculator className="h-4 w-4 text-accent" /> Factoring comercial
+            </p>
           </motion.div>
         </motion.div>
       </div>

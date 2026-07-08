@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
-
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -50,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${display.variable} ${sans.variable} antialiased`}>
+      <body className={`${sans.variable} antialiased`}>
         <Providers>
           <Navbar />
           <main className="min-h-screen">{children}</main>

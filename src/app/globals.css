@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /*
   ASICORP design tokens.
   Azul corporativo del logo (#2C59A4), carbón (#3E3E40) y verde de "liquidez".
@@ -41,40 +39,8 @@
   --brand-tint: #dce6f6;
 
   --radius: 0.75rem;
-}
 
-.dark {
-  --background: #091223;
-  --foreground: #e7ecf5;
-
-  --card: #0f1d33;
-  --card-foreground: #e7ecf5;
-
-  --muted: #16263f;
-  --muted-foreground: #93a3bc;
-
-  --border: #1f3457;
-  --input: #25406a;
-
-  --primary: #5b8ee0;
-  --primary-foreground: #04122b;
-
-  --secondary: #2a4f8f;
-  --secondary-foreground: #ffffff;
-
-  --accent: #2bd07f;
-  --accent-foreground: #04140a;
-
-  --ring: #5b8ee0;
-
-  --success: #2bd07f;
-  --danger: #f06868;
-
-  --brand-blue: #3a6fc4;
-  --brand-blue-bright: #5b8ee0;
-  --brand-navy: #16306b;
-  --brand-ink: #c8cdd6;
-  --brand-tint: #16263f;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -102,7 +68,7 @@
   --color-brand-ink: var(--brand-ink);
   --color-brand-tint: var(--brand-tint);
 
-  --font-display: var(--font-display);
+  --font-display: var(--font-sans);
   --font-sans: var(--font-sans);
 
   --radius-lg: var(--radius);
@@ -180,6 +146,24 @@ html.lenis body {
 @utility dot-texture {
   background-image: radial-gradient(color-mix(in srgb, var(--primary) 18%, transparent) 1px, transparent 1px);
   background-size: 22px 22px;
+}
+
+@utility line-texture {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--primary) 9%, transparent) 0,
+      color-mix(in srgb, var(--primary) 9%, transparent) 1px,
+      transparent 1px,
+      transparent 15px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--primary) 9%, transparent) 0,
+      color-mix(in srgb, var(--primary) 9%, transparent) 1px,
+      transparent 1px,
+      transparent 15px
+    );
 }
 
 @utility shadow-soft {

@@ -75,7 +75,7 @@ export default function ServiciosPage() {
     <div className="pb-24">
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 md:pt-40">
-        <div className="pointer-events-none absolute inset-0 dot-texture opacity-40" />
+        <div className="pointer-events-none absolute inset-0 line-texture opacity-40" />
         <div className="container-page relative z-10 mx-auto max-w-4xl px-5 text-center md:px-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
             Servicios

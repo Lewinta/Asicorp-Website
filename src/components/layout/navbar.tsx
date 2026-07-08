@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { mainNav } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/components/providers";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -16,7 +15,6 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -114,13 +112,6 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggle}
-            aria-label="Cambiar tema"
-            className="grid h-10 w-10 place-items-center rounded-full text-foreground/80 transition-colors hover:bg-muted"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
           <Button href="/evaluacion" size="sm" className="hidden sm:inline-flex">
             Evaluación gratuita
           </Button>
