@@ -12,6 +12,7 @@ import {
   Calculator,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Parallax } from "@/components/motion/parallax";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -20,8 +21,10 @@ export function HeroFoto() {
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       {/* atmósfera */}
       <div className="pointer-events-none absolute inset-0 line-texture opacity-40" />
-      <div className="pointer-events-none absolute -left-40 -top-20 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,var(--brand-blue)_0%,transparent_62%)] opacity-[0.16] blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 top-32 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,var(--brand-navy)_0%,transparent_62%)] opacity-[0.14] blur-3xl" />
+      <Parallax className="pointer-events-none absolute inset-0" range={["-10%", "10%"]}>
+        <div className="pointer-events-none absolute -left-40 -top-20 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,var(--brand-blue)_0%,transparent_62%)] opacity-[0.16] blur-3xl" />
+        <div className="pointer-events-none absolute -right-40 top-32 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,var(--brand-navy)_0%,transparent_62%)] opacity-[0.14] blur-3xl" />
+      </Parallax>
 
       <div className="container-page relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 md:px-8 lg:grid-cols-[1.05fr_0.95fr]">
         {/* Texto */}
@@ -100,14 +103,16 @@ export function HeroFoto() {
           <div className="absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_70%_20%,var(--brand-blue),transparent_60%)] opacity-20 blur-2xl" />
 
           <div className="relative aspect-[2136/1506] w-full overflow-hidden rounded-3xl border border-border bg-card shadow-lift">
-            <Image
-              src="/asicorp_banner.jpg"
-              alt="Estetoscopio, calculadora y la firma de un acuerdo: factoring médico y comercial de Asicorp"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
+            <Parallax className="absolute inset-0 scale-110" range={["-5%", "5%"]}>
+              <Image
+                src="/asicorp_banner.jpg"
+                alt="Estetoscopio, calculadora y la firma de un acuerdo: factoring médico y comercial de Asicorp"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </Parallax>
           </div>
 
           {/* Chip flotante: los dos tipos de factoring */}
