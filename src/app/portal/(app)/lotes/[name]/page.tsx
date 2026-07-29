@@ -54,7 +54,7 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
             <thead>
               <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="px-4 py-3">NCF</th><th className="px-4 py-3">Referencia</th>
-                <th className="px-4 py-3">Vencimiento</th><th className="px-4 py-3 text-right">Monto</th>
+                <th className="px-4 py-3">Cliente</th><th className="px-4 py-3 text-right">Monto</th>
                 <th className="px-4 py-3 text-right">Cobrado</th><th className="px-4 py-3 text-right">Pendiente</th>
               </tr>
             </thead>
@@ -63,7 +63,7 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
                 <tr key={idx} className="border-b border-border/60 last:border-0">
                   <td className="px-4 py-3 font-medium">{f.ncf || "—"}</td>
                   <td className="px-4 py-3 text-muted-foreground">{f.referencia || "—"}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{fecha(f.vencimiento)}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{f.cliente || "—"}</td>
                   <td className="px-4 py-3 text-right">{money(f.monto)}</td>
                   <td className="px-4 py-3 text-right">{money(f.cobrado)}</td>
                   <td className="px-4 py-3 text-right font-semibold">{money(f.pendiente)}</td>

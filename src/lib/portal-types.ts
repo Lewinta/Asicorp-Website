@@ -14,7 +14,7 @@ export type PortalSummary = {
 };
 
 export type FacturaRow = {
-  fecha: string; referencia: string; ncf: string;
+  fecha: string; referencia: string; ncf: string; cliente: string;
   vencimiento: string; monto: number; cobrado: number; pendiente: number;
 };
 
