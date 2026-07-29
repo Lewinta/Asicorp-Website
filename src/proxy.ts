@@ -3,7 +3,7 @@ import { getIronSession } from "iron-session";
 import { sessionOptions } from "@/lib/session-options";
 import type { PortalSession } from "@/lib/portal-types";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const res = NextResponse.next();
   const session = await getIronSession<Partial<PortalSession>>(req, res, sessionOptions);
   const isAuth = Boolean(session.cedente && session.email);
