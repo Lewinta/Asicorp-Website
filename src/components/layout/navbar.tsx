@@ -121,6 +121,12 @@ export function Navbar() {
           >
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
+          <Link
+            href="/portal/login"
+            className="hidden rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground sm:inline-flex"
+          >
+            Acceso cedentes
+          </Link>
           <Button href="/evaluacion" size="sm" className="hidden sm:inline-flex">
             Evaluación gratuita
           </Button>
@@ -169,7 +175,13 @@ export function Navbar() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-4">
+              <div className="mt-4 space-y-2">
+                <Link
+                  href="/portal/login"
+                  className="block rounded-xl border border-border px-4 py-3 text-center text-base font-medium text-foreground hover:bg-muted"
+                >
+                  Acceso cedentes
+                </Link>
                 <Button href="/evaluacion" className="w-full">
                   Evaluación gratuita
                 </Button>
