@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/providers";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -46,9 +45,7 @@ export default function RootLayout({
     <html lang="es" suppressHydrationWarning>
       <body className={`${sans.variable} antialiased`}>
         <Providers>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </Providers>
       </body>
     </html>
