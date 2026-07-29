@@ -18,7 +18,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function HeroFoto() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section className="relative overflow-hidden pt-32 pb-8 md:pt-40 md:pb-10">
       {/* atmósfera */}
       <div className="pointer-events-none absolute inset-0 line-texture opacity-40" />
       <Parallax className="pointer-events-none absolute inset-0" range={["-10%", "10%"]}>
@@ -93,12 +93,12 @@ export function HeroFoto() {
           </motion.div>
         </div>
 
-        {/* Foto */}
+        {/* Foto — oculta en móvil, visible desde tablet */}
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease, delay: 0.2 }}
-          className="relative"
+          className="relative hidden md:block"
         >
           <div className="absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_70%_20%,var(--brand-blue),transparent_60%)] opacity-20 blur-2xl" />
 

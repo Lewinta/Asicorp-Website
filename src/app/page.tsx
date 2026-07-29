@@ -1,4 +1,5 @@
 import { HeroFoto } from "@/components/home/hero-foto";
+import { TrustBand } from "@/components/home/trust-band";
 import { EjemploReal } from "@/components/home/ejemplo-real";
 import {
   Benefits,
@@ -15,6 +16,7 @@ export default function Home() {
     <>
       <SnapSection>
         <HeroFoto />
+        <TrustBand />
       </SnapSection>
       <SnapSection>
         <EjemploReal />
