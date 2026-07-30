@@ -24,7 +24,7 @@ export default async function AnaliticaPage() {
         <>
           <AnaliticaKpis t={a.totales} />
 
-          <div className="grid gap-6 lg:grid-cols-[1.35fr_1fr]">
+          <div className="space-y-6">
             <div className="space-y-3">
               <div>
                 <h2 className="font-display text-lg font-bold text-foreground">Desempeño por ARS</h2>

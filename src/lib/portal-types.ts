@@ -36,6 +36,15 @@ export type ArsRow = {
   pendiente: number; glosado: number; tasa_glosa: number; n: number;
 };
 export type MensualRow = { mes: string; facturado: number; desembolsado: number };
+
+export type PortalResumen = {
+  anio_label: string;
+  mes_label: string;
+  mes: { desembolsado: number; facturado: number; cobrado: number; lotes: number };
+  anio: { desembolsado: number; facturado: number; cobrado: number; pendiente: number; lotes: number };
+  mensual: MensualRow[];
+  proximos_vencimientos: number;
+};
 export type GlosaRank = { ars: string; glosado: number; tasa: number };
 export type PortalAnalytics = {
   totales: {

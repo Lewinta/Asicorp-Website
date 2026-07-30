@@ -4,6 +4,12 @@ export function money(n: number): string {
   }).format(n || 0);
 }
 
+export function moneyShort(n: number): string {
+  return new Intl.NumberFormat("es-DO", {
+    style: "currency", currency: "DOP", maximumFractionDigits: 0,
+  }).format(n || 0);
+}
+
 export function fecha(d: string): string {
   if (!d) return "—";
   return new Intl.DateTimeFormat("es-DO", { dateStyle: "medium" }).format(new Date(d));
