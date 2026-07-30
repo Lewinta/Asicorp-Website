@@ -13,7 +13,7 @@ export function AnaliticaKpis({ t }: { t: PortalAnalytics["totales"] }) {
         icon={FileText}
       />
       <KpiCard
-        label="Neto desembolsado"
+        label="Desembolsado"
         value={moneyShort(t.neto_desembolsado)}
         sub="liquidez recibida"
         icon={Banknote}

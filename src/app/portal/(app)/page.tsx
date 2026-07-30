@@ -29,12 +29,11 @@ export default async function PortalDashboard() {
         <div className="mb-3 flex items-baseline gap-2">
           <h2 className="font-display text-lg font-bold text-foreground">Acumulado {resumen.anio_label}</h2>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <KpiCard label="Desembolsado" value={moneyShort(anio.desembolsado)} sub="liquidez del año" icon={Banknote} tone="success" />
           <KpiCard label="Facturado" value={moneyShort(anio.facturado)} sub="facturado en el año" icon={FileText} />
           <KpiCard label="Saldo por cobrar" value={moneyShort(anio.pendiente)} sub="pendiente de las ARS" icon={Wallet} />
           <KpiCard label="Próximos vencimientos" value={String(resumen.proximos_vencimientos)} sub="en 15 días" icon={CalendarClock} />
-          <KpiCard label="Lotes" value={String(anio.lotes)} sub="lotes en el año" icon={FileStack} />
         </div>
       </section>
 

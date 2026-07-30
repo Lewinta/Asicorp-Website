@@ -46,7 +46,7 @@ export function PortalSidebar() {
     >
       <div className={`mb-8 flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
         {!collapsed && (
-          <Link href="/" className="inline-flex min-w-0 overflow-hidden">
+          <Link href="/" className="inline-flex min-w-0">
             <Logo compact />
           </Link>
         )}
