@@ -9,6 +9,17 @@ export function fecha(d: string): string {
   return new Intl.DateTimeFormat("es-DO", { dateStyle: "medium" }).format(new Date(d));
 }
 
+export function pct(n: number): string {
+  return `${(n || 0).toFixed(1)}%`;
+}
+
+export function mesLabel(mes: string): string {
+  // "2026-03" -> "Mar 26"
+  const [y, m] = mes.split("-");
+  const meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+  return `${meses[Number(m) - 1] ?? m} ${y.slice(2)}`;
+}
+
 export const ESTADO_STYLE: Record<string, string> = {
   Draft: "bg-muted text-muted-foreground",
   Desembolsado: "bg-[color:var(--success)]/15 text-[color:var(--success)]",

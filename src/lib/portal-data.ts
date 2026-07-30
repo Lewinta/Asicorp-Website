@@ -1,7 +1,7 @@
 import "server-only";
 import { getCedenteSession } from "@/lib/session";
 import { frappeCall } from "@/lib/frappe";
-import type { LoteRow, PortalSummary, LoteDetail } from "@/lib/portal-types";
+import type { LoteRow, PortalSummary, LoteDetail, PortalAnalytics } from "@/lib/portal-types";
 
 export async function fetchSummary(): Promise<PortalSummary> {
   const s = await getCedenteSession();
@@ -29,4 +29,10 @@ export async function fetchNotificationEmail(): Promise<{ email: string; enabled
   const s = await getCedenteSession();
   if (!s) throw new Error("no-session");
   return frappeCall<{ email: string; enabled: boolean }>("asicorp.api.get_notification_email", { cedente: s.cedente });
+}
+
+export async function fetchAnalytics(): Promise<PortalAnalytics> {
+  const s = await getCedenteSession();
+  if (!s) throw new Error("no-session");
+  return frappeCall<PortalAnalytics>("asicorp.api.get_portal_analytics", { cedente: s.cedente });
 }

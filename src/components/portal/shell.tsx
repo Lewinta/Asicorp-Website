@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LayoutDashboard, FileStack, Settings } from "lucide-react";
+import { LayoutDashboard, FileStack, LineChart, Settings } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { LogoutButton } from "@/components/portal/logout-button";
 import type { PortalSession } from "@/lib/portal-types";
@@ -7,6 +7,7 @@ import type { PortalSession } from "@/lib/portal-types";
 const NAV = [
   { href: "/portal", label: "Resumen", icon: LayoutDashboard },
   { href: "/portal/lotes", label: "Mis lotes", icon: FileStack },
+  { href: "/portal/analitica", label: "Analítica", icon: LineChart },
   { href: "/portal/configuracion", label: "Configuración", icon: Settings },
 ];
 

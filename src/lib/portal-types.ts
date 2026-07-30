@@ -30,3 +30,20 @@ export type LoteDetail = {
 };
 
 export type PortalSession = { cedente: string; customerName: string; email: string };
+
+export type ArsRow = {
+  ars: string; facturado: number; neto: number; cobrado: number;
+  pendiente: number; glosado: number; tasa_glosa: number; n: number;
+};
+export type MensualRow = { mes: string; facturado: number; desembolsado: number };
+export type GlosaRank = { ars: string; glosado: number; tasa: number };
+export type PortalAnalytics = {
+  totales: {
+    facturado: number; neto_desembolsado: number; cobrado: number;
+    pendiente: number; glosado: number; tasa_glosa: number;
+    n_facturas: number; n_ars: number;
+  };
+  por_ars: ArsRow[];
+  mensual: MensualRow[];
+  glosas: { tasa_global: number; total: number; ranking: GlosaRank[] };
+};
