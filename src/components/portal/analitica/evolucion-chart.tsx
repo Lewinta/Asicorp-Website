@@ -1,94 +1,72 @@
-import { mesLabel } from "@/lib/format";
+import { mesLabel, money } from "@/lib/format";
 import type { MensualRow } from "@/lib/portal-types";
+
+const PLOT_H = 220; // px
 
 export function EvolucionChart({ rows }: { rows: MensualRow[] }) {
   if (rows.length === 0) return null;
 
-  const W = 400;
-  const H = 210;
-  const axisX = 34;        // left gutter for y labels
-  const baseY = 170;       // baseline y
-  const topY = 20;         // top of plot area
-  const plotH = baseY - topY;
-  const plotW = W - axisX - 8;
-
   const max = Math.max(...rows.flatMap((r) => [r.facturado, r.desembolsado]), 1);
-  const slot = plotW / rows.length;
-  const barW = Math.min(16, slot / 3);
-  const gap = 2;
-
-  const y = (v: number) => baseY - (v / max) * plotH;
-
-  // gridlines at 0, 1/3, 2/3, 3/3 of max
-  const gridVals = [0, max / 3, (max * 2) / 3, max];
-
+  const gridVals = [max, (max * 2) / 3, max / 3, 0];
   const kFmt = (v: number) =>
     v >= 1000 ? `${Math.round(v / 1000)}k` : `${Math.round(v)}`;
 
   return (
     <div>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        className="h-[210px] w-full"
-        preserveAspectRatio="none"
-        role="img"
-        aria-label="Facturado y desembolsado por mes"
-      >
-        <g stroke="var(--border)" strokeWidth="1">
+      <div className="flex gap-3">
+        {/* Eje Y */}
+        <div
+          className="flex w-9 shrink-0 flex-col justify-between text-right text-[10px] leading-none text-muted-foreground"
+          style={{ height: PLOT_H }}
+        >
           {gridVals.map((v, i) => (
-            <line
-              key={i}
-              x1={axisX}
-              y1={y(v)}
-              x2={W - 8}
-              y2={y(v)}
-              opacity={v === 0 ? 1 : 0.5}
-            />
+            <span key={i}>{kFmt(v)}</span>
           ))}
-        </g>
-        <g fill="var(--muted-foreground)" fontSize="9" textAnchor="end">
-          {gridVals.map((v, i) => (
-            <text key={i} x={axisX - 4} y={y(v) + 3}>
-              {kFmt(v)}
-            </text>
-          ))}
-        </g>
-        <g>
-          {rows.map((r, i) => {
-            const cx = axisX + slot * i + slot / 2;
-            const x1 = cx - barW - gap / 2;
-            const x2 = cx + gap / 2;
-            return (
-              <g key={r.mes}>
-                <rect
-                  x={x1}
-                  y={y(r.facturado)}
-                  width={barW}
-                  height={baseY - y(r.facturado)}
-                  rx="2"
-                  fill="var(--primary)"
+        </div>
+
+        {/* Área de plot */}
+        <div className="min-w-0 flex-1">
+          <div className="relative" style={{ height: PLOT_H }}>
+            {/* Gridlines */}
+            <div className="absolute inset-0 flex flex-col justify-between">
+              {gridVals.map((v, i) => (
+                <div
+                  key={i}
+                  className={`h-px w-full ${v === 0 ? "bg-border" : "bg-border/50"}`}
                 />
-                <rect
-                  x={x2}
-                  y={y(r.desembolsado)}
-                  width={barW}
-                  height={baseY - y(r.desembolsado)}
-                  rx="2"
-                  fill="var(--success)"
-                />
-              </g>
-            );
-          })}
-        </g>
-        <g fill="var(--muted-foreground)" fontSize="9" textAnchor="middle">
-          {rows.map((r, i) => (
-            <text key={r.mes} x={axisX + slot * i + slot / 2} y={baseY + 14}>
-              {mesLabel(r.mes)}
-            </text>
-          ))}
-        </g>
-      </svg>
-      <div className="mt-2 flex gap-4 text-xs text-muted-foreground">
+              ))}
+            </div>
+            {/* Barras */}
+            <div className="relative flex h-full items-end gap-4 px-1">
+              {rows.map((r) => (
+                <div key={r.mes} className="flex h-full flex-1 items-end justify-center gap-1.5">
+                  <div
+                    title={`Facturado: ${money(r.facturado)}`}
+                    className="w-1/2 max-w-[20px] rounded-t bg-primary transition-all"
+                    style={{ height: `${(r.facturado / max) * 100}%` }}
+                  />
+                  <div
+                    title={`Desembolsado: ${money(r.desembolsado)}`}
+                    className="w-1/2 max-w-[20px] rounded-t bg-[color:var(--success)] transition-all"
+                    style={{ height: `${(r.desembolsado / max) * 100}%` }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Etiquetas de mes */}
+          <div className="mt-2 flex gap-4 px-1">
+            {rows.map((r) => (
+              <div key={r.mes} className="flex-1 text-center text-[11px] text-muted-foreground">
+                {mesLabel(r.mes)}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Leyenda */}
+      <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <i className="inline-block h-2.5 w-2.5 rounded-[3px] bg-primary" />
           Facturado

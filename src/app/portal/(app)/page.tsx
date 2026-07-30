@@ -1,18 +1,14 @@
 import { Banknote, FileText, Check, FileStack, Wallet, CalendarClock } from "lucide-react";
-import { fetchResumen, fetchLotes } from "@/lib/portal-data";
+import { fetchResumen } from "@/lib/portal-data";
 import { moneyShort } from "@/lib/format";
 import { KpiCard } from "@/components/portal/kpi-card";
-import { LotesTable } from "@/components/portal/lotes-table";
 import { EvolucionChart } from "@/components/portal/analitica/evolucion-chart";
 
 export const dynamic = "force-dynamic";
 
 export default async function PortalDashboard() {
-  const [resumen, lotes] = await Promise.all([fetchResumen(), fetchLotes()]);
+  const resumen = await fetchResumen();
   const { mes, anio } = resumen;
-  const lotesDelAnio = lotes.filter(
-    (l) => l.fecha && new Date(l.fecha).getFullYear() === Number(resumen.anio_label),
-  );
 
   return (
     <div className="space-y-8">
@@ -52,11 +48,6 @@ export default async function PortalDashboard() {
             <EvolucionChart rows={resumen.mensual} />
           )}
         </div>
-      </section>
-
-      <section>
-        <h2 className="mb-3 font-display text-lg font-bold text-foreground">Lotes recientes</h2>
-        <LotesTable rows={lotesDelAnio.slice(0, 8)} />
       </section>
     </div>
   );
