@@ -3,10 +3,36 @@ import type { MensualRow } from "@/lib/portal-types";
 
 const PLOT_H = 220; // px
 
+function Bar({
+  value, max, colorClass, label,
+}: {
+  value: number; max: number; colorClass: string; label: string;
+}) {
+  const pct = max > 0 ? (value / max) * 100 : 0;
+  return (
+    <div className="group relative flex h-full w-1/3 max-w-[16px] items-end justify-center">
+      <div
+        className={`w-full rounded-t transition-all ${colorClass}`}
+        style={{ height: `${pct}%` }}
+      />
+      {/* Tooltip que aparece al hacer hover mostrando el monto */}
+      <div
+        className="pointer-events-none absolute left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-card px-2 py-1 text-[11px] font-medium text-foreground opacity-0 shadow-md transition-opacity duration-150 group-hover:opacity-100"
+        style={{ bottom: `calc(${pct}% + 6px)` }}
+      >
+        {label}: {money(value)}
+      </div>
+    </div>
+  );
+}
+
 export function EvolucionChart({ rows }: { rows: MensualRow[] }) {
   if (rows.length === 0) return null;
 
-  const max = Math.max(...rows.flatMap((r) => [r.facturado, r.desembolsado]), 1);
+  const max = Math.max(
+    ...rows.flatMap((r) => [r.facturado, r.desembolsado, r.glosado]),
+    1,
+  );
   const gridVals = [max, (max * 2) / 3, max / 3, 0];
   const kFmt = (v: number) =>
     v >= 1000 ? `${Math.round(v / 1000)}k` : `${Math.round(v)}`;
@@ -39,17 +65,10 @@ export function EvolucionChart({ rows }: { rows: MensualRow[] }) {
             {/* Barras */}
             <div className="relative flex h-full items-end gap-4 px-1">
               {rows.map((r) => (
-                <div key={r.mes} className="flex h-full flex-1 items-end justify-center gap-1.5">
-                  <div
-                    title={`Facturado: ${money(r.facturado)}`}
-                    className="w-1/2 max-w-[20px] rounded-t bg-primary transition-all"
-                    style={{ height: `${(r.facturado / max) * 100}%` }}
-                  />
-                  <div
-                    title={`Desembolsado: ${money(r.desembolsado)}`}
-                    className="w-1/2 max-w-[20px] rounded-t bg-[color:var(--success)] transition-all"
-                    style={{ height: `${(r.desembolsado / max) * 100}%` }}
-                  />
+                <div key={r.mes} className="flex h-full flex-1 items-end justify-center gap-1">
+                  <Bar value={r.facturado} max={max} colorClass="bg-primary" label="Facturado" />
+                  <Bar value={r.desembolsado} max={max} colorClass="bg-[color:var(--success)]" label="Desembolsado" />
+                  <Bar value={r.glosado} max={max} colorClass="bg-[color:var(--danger)]" label="Glosado" />
                 </div>
               ))}
             </div>
@@ -66,7 +85,7 @@ export function EvolucionChart({ rows }: { rows: MensualRow[] }) {
       </div>
 
       {/* Leyenda */}
-      <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
+      <div className="mt-3 flex flex-wrap gap-4 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <i className="inline-block h-2.5 w-2.5 rounded-[3px] bg-primary" />
           Facturado
@@ -74,6 +93,10 @@ export function EvolucionChart({ rows }: { rows: MensualRow[] }) {
         <span className="inline-flex items-center gap-1.5">
           <i className="inline-block h-2.5 w-2.5 rounded-[3px] bg-[color:var(--success)]" />
           Desembolsado
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2.5 w-2.5 rounded-[3px] bg-[color:var(--danger)]" />
+          Glosado
         </span>
       </div>
     </div>

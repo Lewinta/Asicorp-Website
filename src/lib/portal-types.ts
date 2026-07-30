@@ -35,7 +35,7 @@ export type ArsRow = {
   ars: string; facturado: number; neto: number; cobrado: number;
   pendiente: number; glosado: number; tasa_glosa: number; n: number;
 };
-export type MensualRow = { mes: string; facturado: number; desembolsado: number };
+export type MensualRow = { mes: string; facturado: number; desembolsado: number; glosado: number };
 
 export type PortalResumen = {
   anio_label: string;
