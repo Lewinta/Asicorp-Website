@@ -54,7 +54,7 @@ export function PortalSidebar({ name }: { name: string }) {
       </div>
 
       {!collapsed && (
-        <div className="mb-6 rounded-xl bg-muted/60 px-3 py-2.5">
+        <div className="mb-6 px-3 text-center">
           <p className="text-[11px] text-muted-foreground">Portal del Cedente</p>
           <p className="truncate text-sm font-bold text-foreground">Hola, {name}</p>
         </div>
