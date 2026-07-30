@@ -32,7 +32,7 @@ export function PortalSidebar() {
 
   return (
     <aside
-      className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-border bg-card p-4 lg:flex ${
+      className={`sticky top-0 hidden h-screen shrink-0 flex-col self-start overflow-y-auto border-r border-border bg-card p-4 lg:flex ${
         collapsed ? "w-[72px]" : "w-64"
       }`}
     >
