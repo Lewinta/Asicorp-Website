@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, Mail } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -38,9 +39,14 @@ export function LoginForm() {
         <label className="mb-1.5 block text-sm font-medium text-foreground">Contraseña</label>
         <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-ring/30">
           <Lock className="h-4 w-4 text-muted-foreground" />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+          <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••" autoComplete="current-password"
             className="h-11 w-full bg-transparent text-sm outline-none" />
+          <button type="button" onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+            className="shrink-0 text-muted-foreground transition-colors hover:text-foreground">
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
         </div>
       </div>
       {error && <p className="rounded-lg bg-[color:var(--danger)]/10 px-3 py-2 text-sm text-[color:var(--danger)]">{error}</p>}
