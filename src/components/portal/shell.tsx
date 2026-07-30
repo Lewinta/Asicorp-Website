@@ -8,7 +8,7 @@ export function PortalShell({
     .split(" ").slice(0, 2).map((n) => n[0]).join("").toUpperCase();
   return (
     <div className="min-h-screen bg-muted/40">
-      <div className="mx-auto flex max-w-7xl">
+      <div className="flex">
         <PortalSidebar />
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-border bg-card/80 px-5 py-3 backdrop-blur md:px-8">
