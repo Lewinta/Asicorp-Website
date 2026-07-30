@@ -50,12 +50,13 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
       <section>
         <h2 className="mb-3 font-display text-lg font-bold text-foreground">Facturas por cobrar</h2>
         <div className="overflow-x-auto rounded-2xl border border-border bg-card">
-          <table className="w-full min-w-[640px] text-sm">
+          <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="px-4 py-3">NCF</th><th className="px-4 py-3">Referencia</th>
                 <th className="px-4 py-3">Cliente</th><th className="px-4 py-3 text-right">Monto</th>
-                <th className="px-4 py-3 text-right">Cobrado</th><th className="px-4 py-3 text-right">Pendiente</th>
+                <th className="px-4 py-3 text-right">Cobrado</th><th className="px-4 py-3 text-right">Glosado</th>
+                <th className="px-4 py-3 text-right">Pendiente</th>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +67,7 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
                   <td className="px-4 py-3 text-muted-foreground">{f.cliente || "—"}</td>
                   <td className="px-4 py-3 text-right">{money(f.monto)}</td>
                   <td className="px-4 py-3 text-right">{money(f.cobrado)}</td>
+                  <td className={`px-4 py-3 text-right ${f.glosado > 0 ? "font-medium text-[color:var(--danger)]" : "text-muted-foreground"}`}>{money(f.glosado)}</td>
                   <td className="px-4 py-3 text-right font-semibold">{money(f.pendiente)}</td>
                 </tr>
               ))}

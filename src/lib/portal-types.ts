@@ -15,7 +15,7 @@ export type PortalSummary = {
 
 export type FacturaRow = {
   fecha: string; referencia: string; ncf: string; cliente: string;
-  vencimiento: string; monto: number; cobrado: number; pendiente: number;
+  vencimiento: string; monto: number; cobrado: number; glosado: number; pendiente: number;
 };
 
 export type DeduccionRow = {
