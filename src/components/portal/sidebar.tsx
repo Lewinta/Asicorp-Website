@@ -2,18 +2,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard, FileStack, LineChart, Settings, PanelLeftClose, PanelLeft,
-} from "lucide-react";
+import { PanelLeftClose, PanelLeft } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { LogoutButton } from "@/components/portal/logout-button";
-
-const NAV = [
-  { href: "/portal", label: "Resumen", icon: LayoutDashboard },
-  { href: "/portal/lotes", label: "Mis lotes", icon: FileStack },
-  { href: "/portal/analitica", label: "Analítica", icon: LineChart },
-  { href: "/portal/configuracion", label: "Configuración", icon: Settings },
-];
+import { PORTAL_NAV, isNavActive } from "@/components/portal/nav-items";
 
 const STORAGE_KEY = "asicorp_sidebar_collapsed";
 
@@ -62,8 +54,8 @@ export function PortalSidebar() {
       </div>
 
       <nav className="flex flex-1 flex-col gap-1">
-        {NAV.map((i) => {
-          const active = i.href === "/portal" ? pathname === "/portal" : pathname.startsWith(i.href);
+        {PORTAL_NAV.map((i) => {
+          const active = isNavActive(i.href, pathname);
           return (
             <Link
               key={i.href}
