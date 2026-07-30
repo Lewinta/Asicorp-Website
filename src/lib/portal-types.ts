@@ -4,6 +4,8 @@ export type LoteRow = {
   estado: "Draft" | "Desembolsado" | "Vencido" | "Cobrado" | "Cancelado";
   monto_total: number;
   neto_desembolsar: number;
+  cobrado: number;
+  glosado: number;
 };
 
 export type PortalSummary = {

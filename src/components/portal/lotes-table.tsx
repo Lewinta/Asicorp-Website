@@ -8,11 +8,12 @@ export function LotesTable({ rows }: { rows: LoteRow[] }) {
   }
   return (
     <div className="overflow-x-auto rounded-2xl border border-border bg-card">
-      <table className="w-full min-w-[640px] text-sm">
+      <table className="w-full min-w-[760px] text-sm">
         <thead>
           <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
             <th className="px-4 py-3">Lote</th><th className="px-4 py-3">Fecha</th>
             <th className="px-4 py-3">Estado</th><th className="px-4 py-3 text-right">Monto total</th>
+            <th className="px-4 py-3 text-right">Cobrado</th><th className="px-4 py-3 text-right">Glosado</th>
             <th className="px-4 py-3 text-right">Neto desembolsado</th>
           </tr>
         </thead>
@@ -27,6 +28,8 @@ export function LotesTable({ rows }: { rows: LoteRow[] }) {
                 <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${ESTADO_STYLE[r.estado] ?? ""}`}>{r.estado}</span>
               </td>
               <td className="px-4 py-3 text-right">{money(r.monto_total)}</td>
+              <td className="px-4 py-3 text-right">{money(r.cobrado)}</td>
+              <td className={`px-4 py-3 text-right ${r.glosado > 0 ? "font-medium text-[color:var(--danger)]" : "text-muted-foreground"}`}>{money(r.glosado)}</td>
               <td className="px-4 py-3 text-right font-semibold">{money(r.neto_desembolsar)}</td>
             </tr>
           ))}
