@@ -11,9 +11,9 @@ export function PortalShell({
   return (
     <div className="min-h-screen bg-muted/40">
       <div className="flex">
-        <PortalSidebar />
+        <PortalSidebar name={name} initials={initials} />
         <div className="flex min-w-0 flex-1 flex-col">
-          <PortalHeader name={name} initials={initials} />
+          <PortalHeader />
           <main className="px-5 py-6 md:px-8">{children}</main>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { PORTAL_NAV, isNavActive } from "@/components/portal/nav-items";
 
 const STORAGE_KEY = "asicorp_sidebar_collapsed";
 
-export function PortalSidebar() {
+export function PortalSidebar({ name, initials }: { name: string; initials: string }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -52,6 +52,24 @@ export function PortalSidebar() {
           {collapsed ? <PanelLeft className="h-[18px] w-[18px]" /> : <PanelLeftClose className="h-[18px] w-[18px]" />}
         </button>
       </div>
+
+      {!collapsed ? (
+        <div className="mb-6 flex items-center gap-2.5 rounded-xl bg-muted/60 px-3 py-2.5">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+            {initials}
+          </span>
+          <div className="min-w-0">
+            <p className="text-[11px] text-muted-foreground">Portal del Cedente</p>
+            <p className="truncate text-sm font-bold text-foreground">Hola, {name}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="mb-6 flex justify-center">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+            {initials}
+          </span>
+        </div>
+      )}
 
       <nav className="flex flex-1 flex-col gap-1">
         {PORTAL_NAV.map((i) => {
