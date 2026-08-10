@@ -6,10 +6,11 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { LogoutButton } from "@/components/portal/logout-button";
-import { isNavActive, type NavItem } from "@/components/portal/nav-items";
+import { buildPortalNav, isNavActive } from "@/components/portal/nav-items";
 
-export function MobileNav({ nav }: { nav: NavItem[] }) {
+export function MobileNav({ hasLineaCredito }: { hasLineaCredito: boolean }) {
   const pathname = usePathname();
+  const nav = buildPortalNav({ lineaCredito: hasLineaCredito });
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 

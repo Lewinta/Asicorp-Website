@@ -5,12 +5,13 @@ import { usePathname } from "next/navigation";
 import { PanelLeftClose, PanelLeft } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { LogoutButton } from "@/components/portal/logout-button";
-import { isNavActive, type NavItem } from "@/components/portal/nav-items";
+import { buildPortalNav, isNavActive } from "@/components/portal/nav-items";
 
 const STORAGE_KEY = "asicorp_sidebar_collapsed";
 
-export function PortalSidebar({ name, nav }: { name: string; nav: NavItem[] }) {
+export function PortalSidebar({ name, hasLineaCredito }: { name: string; hasLineaCredito: boolean }) {
   const pathname = usePathname();
+  const nav = buildPortalNav({ lineaCredito: hasLineaCredito });
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
