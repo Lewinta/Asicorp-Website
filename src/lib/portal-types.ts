@@ -1,7 +1,7 @@
 export type LoteRow = {
   name: string;
   fecha: string;
-  estado: "Draft" | "Desembolsado" | "Vencido" | "Cobrado" | "Cancelado";
+  estado: "Draft" | "Desembolsado" | "Cobro Parcial" | "Vencido" | "Cobrado" | "Cancelado";
   monto_total: number;
   neto_desembolsar: number;
   cobrado: number;
@@ -17,7 +17,8 @@ export type PortalSummary = {
 
 export type FacturaRow = {
   fecha: string; referencia: string; ncf: string; cliente: string;
-  vencimiento: string; monto: number; cobrado: number; glosado: number; pendiente: number;
+  vencimiento: string; monto: number; cobrado: number; cobrado_por_cedente: number;
+  glosado: number; pendiente: number;
 };
 
 export type DeduccionRow = {
@@ -32,6 +33,59 @@ export type LoteDetail = {
 };
 
 export type PortalSession = { cedente: string; customerName: string; email: string };
+
+export type LineaEstado = "Active" | "Pending" | "Paid" | "Closed";
+
+export type AmortizacionTipo =
+  | "Daily" | "Weekly" | "Biweekly" | "Monthly"
+  | "Quarterly" | "Biannual" | "Annual";
+
+export type LineaCreditoRow = {
+  name: string;
+  posting_date: string;
+  status: LineaEstado;
+  credit_amount: number;
+  used_amount: number;
+  available_amount: number;
+  outstanding_amount: number;
+  annual_rate: number;
+  amortization_type: AmortizacionTipo;
+  next_amortization: string | null;
+};
+
+/**
+ * Una fila de la tabla de amortización: un pago recibido y su reparto.
+ * `referencia` es el comprobante que ve el cedente (`reference_name` del ledger
+ * si lo hay, si no el `name` del propio asiento).
+ */
+export type PagoLinea = {
+  posting_date: string;
+  referencia: string;
+  capital: number;
+  interes: number;
+  total: number;
+  saldo_despues: number;
+};
+
+/** Un asiento del ledger que consumió la línea. */
+export type MovimientoLinea = {
+  posting_date: string;
+  entry_type: string;
+  amount: number;
+  reference_type: string | null;
+  reference_name: string | null;
+  comment: string;
+  amount_after_transaction: number;
+};
+
+export type LineaCreditoDetail = LineaCreditoRow & {
+  interest_amount: number;
+  payments: number;
+  last_amortization: string | null;
+  pagos: PagoLinea[];
+  movimientos: MovimientoLinea[];
+  totales: { capital: number; interes: number; pagado: number };
+};
 
 export type ArsRow = {
   ars: string; facturado: number; neto: number; cobrado: number;

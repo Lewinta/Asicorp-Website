@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { LogoutButton } from "@/components/portal/logout-button";
-import { PORTAL_NAV, isNavActive } from "@/components/portal/nav-items";
+import { isNavActive, type NavItem } from "@/components/portal/nav-items";
 
-export function MobileNav() {
+export function MobileNav({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -40,7 +40,7 @@ export function MobileNav() {
           </button>
         </div>
         <nav className="flex flex-1 flex-col gap-1">
-          {PORTAL_NAV.map((i) => {
+          {nav.map((i) => {
             const active = isNavActive(i.href, pathname);
             return (
               <Link

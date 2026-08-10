@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { MobileNav } from "@/components/portal/mobile-nav";
+import type { NavItem } from "@/components/portal/nav-items";
 
 // Barra superior solo en móvil: da acceso al menú (hamburguesa). En desktop no
 // hay barra; el saludo y la navegación viven en el sidebar.
-export function PortalHeader() {
+export function PortalHeader({ nav }: { nav: NavItem[] }) {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export function PortalHeader() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <MobileNav />
+      <MobileNav nav={nav} />
       <span className="font-display text-base font-extrabold tracking-tight text-primary">
         ASICORP
       </span>

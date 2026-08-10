@@ -1,7 +1,10 @@
 import "server-only";
 import { getCedenteSession } from "@/lib/session";
 import { frappeCall } from "@/lib/frappe";
-import type { LoteRow, PortalSummary, LoteDetail, PortalAnalytics, PortalResumen } from "@/lib/portal-types";
+import type {
+  LoteRow, PortalSummary, LoteDetail, PortalAnalytics, PortalResumen,
+  LineaCreditoRow, LineaCreditoDetail,
+} from "@/lib/portal-types";
 
 export async function fetchSummary(): Promise<PortalSummary> {
   const s = await getCedenteSession();
@@ -35,6 +38,24 @@ export async function fetchAnalytics(): Promise<PortalAnalytics> {
   const s = await getCedenteSession();
   if (!s) throw new Error("no-session");
   return frappeCall<PortalAnalytics>("asicorp.api.get_portal_analytics", { cedente: s.cedente });
+}
+
+// --- Línea de Crédito -------------------------------------------------------
+// Fase 2: data real desde Frappe (app `asicorp`), filtrando por el cedente de
+// la sesión. Los endpoints calcan LineaCreditoRow / LineaCreditoDetail.
+
+export async function fetchLineas(): Promise<LineaCreditoRow[]> {
+  const s = await getCedenteSession();
+  if (!s) throw new Error("no-session");
+  return frappeCall<LineaCreditoRow[]>("asicorp.api.get_portal_lineas", { cedente: s.cedente });
+}
+
+export async function fetchLineaDetail(linea: string): Promise<LineaCreditoDetail> {
+  const s = await getCedenteSession();
+  if (!s) throw new Error("no-session");
+  return frappeCall<LineaCreditoDetail>("asicorp.api.get_portal_linea_detail", {
+    cedente: s.cedente, linea,
+  });
 }
 
 export async function fetchResumen(): Promise<PortalResumen> {

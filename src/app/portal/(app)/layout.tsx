@@ -12,10 +12,15 @@ export default async function PortalLayout({ children }: { children: React.React
   // Si un rename/merge del Customer en el ERP cambió el nombre del cedente, la
   // cookie quedaría apuntando a un cedente inexistente y las consultas darían 403
   // -> 500. Detectamos el desfase y sanamos la sesión en /portal/session-refresh.
-  const fresh = await frappeCall<PortalSession>("asicorp.api.get_portal_profile", {
-    email: session.email,
-  });
+  const fresh = await frappeCall<PortalSession & { has_linea_credito?: boolean }>(
+    "asicorp.api.get_portal_profile",
+    { email: session.email },
+  );
   if (fresh.cedente !== session.cedente) redirect("/portal/session-refresh");
 
-  return <PortalShell session={session}>{children}</PortalShell>;
+  return (
+    <PortalShell session={session} hasLineaCredito={!!fresh.has_linea_credito}>
+      {children}
+    </PortalShell>
+  );
 }

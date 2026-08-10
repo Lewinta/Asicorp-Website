@@ -11,6 +11,11 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
   let d;
   try { d = await fetchLoteDetail(name); } catch { notFound(); }
 
+  // "Cobrado por Cedente" solo aplica cuando la ARS le pagó directo al cedente en vez de
+  // a ASICORP. En la mayoría de los lotes está en cero, así que la columna se oculta
+  // salvo que alguna factura del lote la traiga con valor.
+  const showCobradoCedente = d.facturas.some((f) => (f.cobrado_por_cedente ?? 0) > 0);
+
   const totales = [
     ["Monto total", d.monto_total], ["Comisión", d.comision_monto],
     ["Reserva", d.reserva_monto], ["Impuesto", d.impuesto_monto],
@@ -50,12 +55,14 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
       <section>
         <h2 className="mb-3 font-display text-lg font-bold text-foreground">Facturas por cobrar</h2>
         <div className="overflow-x-auto rounded-2xl border border-border bg-card">
-          <table className="w-full min-w-[720px] text-sm">
+          <table className={`w-full text-sm ${showCobradoCedente ? "min-w-[860px]" : "min-w-[720px]"}`}>
             <thead>
               <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="px-4 py-3">NCF</th><th className="px-4 py-3">Referencia</th>
                 <th className="px-4 py-3">Cliente</th><th className="px-4 py-3 text-right">Monto</th>
-                <th className="px-4 py-3 text-right">Cobrado</th><th className="px-4 py-3 text-right">Glosado</th>
+                <th className="px-4 py-3 text-right">Cobrado</th>
+                {showCobradoCedente && <th className="px-4 py-3 text-right">Cobrado por Cedente</th>}
+                <th className="px-4 py-3 text-right">Glosado</th>
                 <th className="px-4 py-3 text-right">Pendiente</th>
               </tr>
             </thead>
@@ -67,6 +74,9 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
                   <td className="px-4 py-3 text-muted-foreground">{f.cliente || "—"}</td>
                   <td className="px-4 py-3 text-right">{money(f.monto)}</td>
                   <td className="px-4 py-3 text-right">{money(f.cobrado)}</td>
+                  {showCobradoCedente && (
+                    <td className="px-4 py-3 text-right">{money(f.cobrado_por_cedente ?? 0)}</td>
+                  )}
                   <td className={`px-4 py-3 text-right ${f.glosado > 0 ? "font-medium text-[color:var(--danger)]" : "text-muted-foreground"}`}>{money(f.glosado)}</td>
                   <td className="px-4 py-3 text-right font-semibold">{money(f.pendiente)}</td>
                 </tr>

@@ -30,6 +30,7 @@
 
   --success: #18a558;
   --danger: #d14343;
+  --warning: #e8710a;
 
   /* Marca cruda para gradientes y degradados */
   --brand-blue: #2c59a4;
@@ -61,6 +62,7 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-danger: var(--danger);
+  --color-warning: var(--warning);
 
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-bright: var(--brand-blue-bright);
