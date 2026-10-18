@@ -44,7 +44,7 @@ export function Navbar() {
           <Logo compact={scrolled} />
         </Link>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {mainNav.map((item) => {
             const active = pathname === item.href;
             if (item.children) {
@@ -106,7 +106,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
+                    "whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
                     active && "text-primary",
                   )}
                 >
@@ -120,13 +120,13 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/portal/login"
-            className="hidden rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground sm:inline-flex"
+            className="hidden whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground sm:inline-flex"
           >
             Acceso cedentes
           </Link>
           <Link
             href="/evaluacion"
-            className="hidden min-h-10 items-center rounded-[4px] bg-navy-deep px-4 text-sm font-medium text-white transition-colors hover:bg-primary sm:inline-flex"
+            className="hidden min-h-10 items-center whitespace-nowrap rounded-[4px] bg-navy-deep px-4 text-sm font-medium text-white transition-colors hover:bg-primary sm:inline-flex"
           >
             Agendar diagnóstico
           </Link>
@@ -134,7 +134,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center rounded-full text-foreground lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full text-foreground xl:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -147,7 +147,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-border bg-background/95 shadow-soft backdrop-blur-md lg:hidden"
+            className="overflow-hidden border-b border-border bg-background/95 shadow-soft backdrop-blur-md xl:hidden"
           >
             <div className="container-page mx-auto max-w-7xl px-5 pb-6 pt-2">
               <ul className="flex flex-col gap-1">
