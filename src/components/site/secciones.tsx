@@ -51,7 +51,7 @@ export function Desafio() {
               <>
                 Usted factura hoy.
                 <br />
-                <em className="text-ink-soft">La ARS paga en meses.</em>
+                <span className="text-ink-soft">La ARS paga en meses.</span>
               </>
             }
             lead="Mientras tanto, la nómina, los proveedores y los gastos no esperan. Así se ve el problema que resolvemos."
@@ -81,9 +81,9 @@ export function Desafio() {
               transition={{ duration: 0.7, ease, delay: i * 0.08 }}
               className="group grid grid-cols-[3rem_1fr] gap-4 border-b border-rule py-8 md:grid-cols-[4.5rem_1fr] md:py-10"
             >
-              <span className="font-mono text-sm text-stamp">0{i + 1}</span>
+              <span className="text-sm text-stamp font-semibold tabular">0{i + 1}</span>
               <div>
-                <h3 className="font-serif text-2xl text-ink transition-colors group-hover:text-primary md:text-[2rem]">
+                <h3 className="text-2xl text-ink transition-colors group-hover:text-primary md:text-[2rem] font-bold">
                   {d.titulo}
                 </h3>
                 <p className="mt-2 text-ink-soft">{d.texto}</p>
@@ -124,7 +124,7 @@ export function Ciclo({ id = "ciclo", num = "02" }: { id?: string; num?: string 
             folio={`${num} / Cesión de crédito`}
             title={
               <>
-                Un ciclo en <em className="text-primary">4 pasos</em>, todos los meses.
+                Un ciclo en <span className="text-gradient-brand">4 pasos</span>, todos los meses.
               </>
             }
             lead="Usted factura; nosotros auditamos, radicamos, anticipamos y cobramos."
@@ -145,7 +145,7 @@ export function Ciclo({ id = "ciclo", num = "02" }: { id?: string; num?: string 
                     activo === i ? "w-14 bg-primary" : "w-6 bg-rule",
                   )}
                 />
-                <span className="font-mono text-xs">{p.n}</span>
+                <span className="text-xs font-semibold tabular">{p.n}</span>
                 <span className="text-sm font-medium">{p.titulo}</span>
               </li>
             ))}
@@ -165,7 +165,7 @@ export function Ciclo({ id = "ciclo", num = "02" }: { id?: string; num?: string 
                 <div aria-hidden className="pointer-events-none absolute inset-0 ledger opacity-60" />
                 <div className="relative">
                   <div className="flex items-start justify-between gap-6">
-                    <span className="font-serif text-7xl leading-none text-primary/15 md:text-8xl">{p.n}</span>
+                    <span className="text-7xl leading-none text-primary/15 md:text-8xl font-extrabold tracking-tight">{p.n}</span>
                     <Sello
                       tono={i === 2 ? "verde" : i === 3 ? "azul" : "rojo"}
                       rotate={i % 2 ? 7 : -7}
@@ -174,8 +174,8 @@ export function Ciclo({ id = "ciclo", num = "02" }: { id?: string; num?: string 
                       {p.sello}
                     </Sello>
                   </div>
-                  <h3 className="mt-6 font-serif text-3xl leading-tight text-ink md:text-4xl">{p.titulo}</h3>
-                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.12em] text-primary">{p.resumen}</p>
+                  <h3 className="mt-6 text-3xl leading-tight text-ink md:text-4xl font-bold">{p.titulo}</h3>
+                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-primary font-semibold tabular">{p.resumen}</p>
                   <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">{p.texto}</p>
                   <ul className="mt-7 grid gap-3 sm:grid-cols-3">
                     {p.puntos.map((pt) => (
@@ -220,12 +220,12 @@ function FilaCobros({ etiqueta, espera, total, acento }: { etiqueta: string; esp
               )}
               title={cobra ? `${m}: cobro` : `${m}: en espera`}
             >
-              <span className="font-mono text-[0.55rem] uppercase md:text-[0.65rem]">{m}</span>
+              <span className="text-[0.55rem] uppercase md:text-[0.65rem] font-semibold tabular">{m}</span>
             </motion.div>
           );
         })}
       </div>
-      <p className={cn("font-serif text-4xl md:text-right", acento ? "text-[#4ade80]" : "text-white/60")}>{total}</p>
+      <p className={cn("text-4xl md:text-right font-bold", acento ? "text-[#4ade80]" : "text-white/60")}>{total}</p>
     </div>
   );
 }
@@ -240,7 +240,7 @@ export function Impacto() {
           folio="03 / Impacto financiero"
           title={
             <>
-              12 cobros al año <em className="text-white/50">en lugar de 9.</em>
+              12 cobros al año <span className="text-white/50">en lugar de 9.</span>
             </>
           }
           lead="Con el ciclo habitual de las ARS, los primeros meses del año se van esperando. Con ASICORP, cada mes facturado es un mes cobrado."
@@ -257,14 +257,14 @@ export function Impacto() {
             <span className="flex items-center gap-3">
               <span className="hatch inline-block h-4 w-6 rounded-[2px] border border-dashed border-white/30" /> Meses en espera de pago
             </span>
-            <span className="font-mono uppercase tracking-[0.12em] text-[#4ade80]">+3 cobros adicionales al año</span>
+            <span className="uppercase tracking-[0.12em] text-[#4ade80] font-semibold tabular">+3 cobros adicionales al año</span>
           </div>
         </div>
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-[6px] bg-white/10 md:grid-cols-3">
           {impacto.map((m, i) => (
             <Rise key={m.valor} delay={i * 0.1} className="bg-navy-deep p-8 md:p-10">
-              <p className="font-serif text-6xl text-white md:text-7xl">{m.valor}</p>
+              <p className="text-6xl text-white md:text-7xl font-extrabold tracking-tight">{m.valor}</p>
               <h3 className="mt-5 text-lg font-medium text-white">{m.titulo}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/60">{m.texto}</p>
             </Rise>
@@ -288,7 +288,7 @@ export function Beneficios() {
             folio="05 / Beneficios clave"
             title={
               <>
-                Lo que cambia en <em className="text-primary">su institución</em>.
+                Lo que cambia en <span className="text-gradient-brand">su institución</span>.
               </>
             }
           />
@@ -310,11 +310,11 @@ export function Beneficios() {
                 transition={{ duration: 0.6, delay: (i % 4) * 0.07 }}
                 className="group relative border-b border-r border-rule bg-white/40 p-7 transition-colors duration-300 hover:bg-white md:p-8"
               >
-                <span aria-hidden className="absolute right-6 top-6 font-mono text-[0.65rem] text-ink-soft/50">
+                <span aria-hidden className="absolute right-6 top-6 text-[0.65rem] text-ink-soft/50 font-semibold tabular">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <Icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.6} />
-                <h3 className="mt-8 font-serif text-2xl leading-tight text-ink">{b.titulo}</h3>
+                <h3 className="mt-8 text-2xl leading-tight text-ink font-bold">{b.titulo}</h3>
                 <p className="mt-2 text-sm text-ink-soft">{b.texto}</p>
               </motion.li>
             );
@@ -336,7 +336,7 @@ export function Complementarios({ id, num = "06" }: { id?: string; num?: string 
             folio={`${num} / Servicios complementarios`}
             title={
               <>
-                Más allá del anticipo: <em className="text-primary">costos, tarifas y auditoría médica</em>.
+                Más allá del anticipo: <span className="text-gradient-brand">costos, tarifas y auditoría médica</span>.
               </>
             }
             lead="Estos servicios se contratan de manera independiente al servicio de cesión de crédito."
@@ -356,11 +356,11 @@ export function Complementarios({ id, num = "06" }: { id?: string; num?: string 
           {complementarios.map((c, i) => (
             <Rise key={c.titulo} delay={i * 0.08}>
               <li className="group grid grid-cols-[auto_1fr] gap-6 border-t border-rule py-9 last:border-b">
-                <span className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 font-mono text-xs text-ink transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-white">
+                <span className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-xs text-ink transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-white font-semibold tabular">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-serif text-2xl leading-snug text-ink md:text-3xl">{c.titulo}</h3>
+                  <h3 className="text-2xl leading-snug text-ink md:text-3xl font-bold">{c.titulo}</h3>
                   <p className="mt-3 text-ink-soft">{c.texto}</p>
                 </div>
               </li>
@@ -383,7 +383,7 @@ export function Inversion({ id = "inversion", num = "07" }: { id?: string; num?:
           align="center"
           title={
             <>
-              Una tarifa clara, <em className="text-primary">publicada</em>.
+              Una tarifa clara, <span className="text-gradient-brand">publicada</span>.
             </>
           }
           lead="La tarifa final se define según el volumen de facturación y el nivel de gestión requerido."
@@ -394,14 +394,14 @@ export function Inversion({ id = "inversion", num = "07" }: { id?: string; num?:
             <div className="grid md:grid-cols-2">
               <div className="border-b border-rule p-8 md:border-b-0 md:border-r md:p-12">
                 <p className="folio text-ink-soft">Mensual</p>
-                <p className="tabular mt-4 font-serif text-5xl text-ink md:text-6xl">
+                <p className="tabular mt-4 text-5xl text-ink md:text-6xl font-extrabold tracking-tight">
                   {pct(tarifa.mensual.min)} <span className="text-ink-soft/60">a</span> {pct(tarifa.mensual.max)}
                 </p>
                 <p className="mt-3 text-ink-soft">de costo mensual del servicio.</p>
               </div>
               <div className="p-8 md:p-12">
                 <p className="folio text-ink-soft">Por lote de facturas</p>
-                <p className="tabular mt-4 font-serif text-5xl text-ink md:text-6xl">
+                <p className="tabular mt-4 text-5xl text-ink md:text-6xl font-extrabold tracking-tight">
                   {pct(tarifa.porLote.min)} <span className="text-ink-soft/60">a</span> {pct(tarifa.porLote.max)}
                 </p>
                 <p className="mt-3 text-ink-soft">por lote, con plazo de hasta {tarifa.porLote.plazoDias} días.</p>
@@ -421,7 +421,7 @@ export function Inversion({ id = "inversion", num = "07" }: { id?: string; num?:
                 </ul>
               </div>
               <div className="border-l-2 border-money pl-6">
-                <p className="font-serif text-2xl leading-snug text-ink">Un costo que puede compensarse.</p>
+                <p className="text-2xl leading-snug text-ink font-bold">Un costo que puede compensarse.</p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                   La inversión puede quedar cubierta con los descuentos por compras al contado.
                 </p>
@@ -447,7 +447,7 @@ export function ProximosPasos() {
           folio="08 / Próximos pasos"
           title={
             <>
-              De la primera reunión a su <em className="text-primary">primer anticipo</em>.
+              De la primera reunión a su <span className="text-gradient-brand">primer anticipo</span>.
             </>
           }
         />
@@ -463,10 +463,10 @@ export function ProximosPasos() {
           {proximosPasos.map((p, i) => (
             <Rise key={p.titulo} delay={0.2 + i * 0.12}>
               <li className="relative">
-                <span className="relative grid h-10 w-10 place-items-center rounded-full bg-navy-deep font-mono text-sm text-white ring-8 ring-white">
+                <span className="relative grid h-10 w-10 place-items-center rounded-full bg-navy-deep text-sm text-white ring-8 ring-white font-semibold tabular">
                   {i + 1}
                 </span>
-                <h3 className="mt-6 font-serif text-2xl text-ink">{p.titulo}</h3>
+                <h3 className="mt-6 text-2xl text-ink font-bold">{p.titulo}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-soft">{p.texto}</p>
               </li>
             </Rise>
@@ -475,7 +475,7 @@ export function ProximosPasos() {
 
         <Rise className="mt-16 flex flex-col gap-6 rounded-[6px] border border-money/30 bg-money/[0.06] p-7 md:flex-row md:items-center md:justify-between md:p-9">
           <div>
-            <p className="font-serif text-2xl text-ink md:text-3xl">Sin compromiso de permanencia</p>
+            <p className="text-2xl text-ink md:text-3xl font-bold">Sin compromiso de permanencia</p>
             <p className="mt-2 max-w-2xl text-ink-soft">
               Puede finalizar el acuerdo en cualquier momento, sin penalidad, con preaviso de sesenta (60) días.
             </p>
@@ -499,7 +499,7 @@ export function Preguntas({ num = "09" }: { num?: string }) {
           folio={`${num} / Preguntas frecuentes`}
           title={
             <>
-              Lo que nos preguntan <em className="text-primary">antes de firmar</em>.
+              Lo que nos preguntan <span className="text-gradient-brand">antes de firmar</span>.
             </>
           }
           className="lg:sticky lg:top-32 lg:self-start"
@@ -508,7 +508,7 @@ export function Preguntas({ num = "09" }: { num?: string }) {
           {preguntas.map((p, i) => (
             <details key={p.q} className="group border-b border-rule" open={i === 0}>
               <summary className="flex cursor-pointer items-center justify-between gap-6 py-6 text-left">
-                <h3 className="font-serif text-xl text-ink md:text-2xl">{p.q}</h3>
+                <h3 className="text-xl text-ink md:text-2xl font-bold">{p.q}</h3>
                 <Plus className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-open:rotate-45" />
               </summary>
               <p className="max-w-2xl pb-7 leading-relaxed text-ink-soft">{p.a}</p>
@@ -536,8 +536,8 @@ export function Cierre({ imagen = oficina }: { imagen?: { src: string; alt: stri
         <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative p-8 md:p-14">
             <p className="folio text-white/50">Hablemos</p>
-            <h2 className="mt-5 text-balance font-serif text-4xl leading-[1.05] md:text-6xl">
-              Será un placer acompañar el crecimiento de <em className="text-white/60">su institución</em>.
+            <h2 className="mt-5 text-balance text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl">
+              Será un placer acompañar el crecimiento de <span className="text-white/60">su institución</span>.
             </h2>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Cta

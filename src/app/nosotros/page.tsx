@@ -18,7 +18,7 @@ export default function NosotrosPage() {
         folio="Nosotros · Asesores e Interventores Corporativos, S.R.L."
         title={
           <>
-            Conocemos las ARS <em className="text-primary">desde adentro</em>.
+            Conocemos las ARS <span className="text-gradient-brand">desde adentro</span>.
           </>
         }
         lead="Somos profesionales con amplia trayectoria en el sector financiero, las ARS y el Sistema Dominicano de Seguridad Social."
@@ -47,7 +47,7 @@ export default function NosotrosPage() {
               folio="Quiénes somos"
               title={
                 <>
-                  Fortalecemos la operación y el <em className="text-primary">flujo de caja</em> de las instituciones de salud.
+                  Fortalecemos la operación y el <span className="text-gradient-brand">flujo de caja</span> de las instituciones de salud.
                 </>
               }
               lead="Sin préstamos, garantías ni avales. Cada mes auditamos su facturación, la radicamos ante las ARS, le anticipamos el total facturado y nos encargamos del cobro y la conciliación, con un software especializado desarrollado para el mercado local."
@@ -72,7 +72,7 @@ export default function NosotrosPage() {
             {cifras.map((c) => (
               <div key={c.etiqueta} className="flex flex-col gap-2 border-rule px-2 py-10 odd:border-r sm:px-6 lg:border-r lg:last:border-r-0">
                 <dt className="order-2 text-sm text-ink-soft">{c.etiqueta}</dt>
-                <dd className="order-1 font-serif text-6xl text-ink">{c.valor}</dd>
+                <dd className="order-1 text-6xl text-ink font-extrabold tracking-tight">{c.valor}</dd>
               </div>
             ))}
           </dl>
@@ -80,14 +80,14 @@ export default function NosotrosPage() {
           <div className="mt-24 grid gap-px overflow-hidden rounded-[6px] border border-rule bg-rule md:grid-cols-2">
             <Rise className="bg-white p-8 md:p-12">
               <p className="folio text-primary">Misión</p>
-              <p className="mt-5 font-serif text-2xl leading-snug text-ink md:text-3xl">
+              <p className="mt-5 text-2xl leading-snug text-ink md:text-3xl font-bold">
                 Brindar liquidez y soluciones financieras integrales al sector salud, con agilidad y transparencia,
                 para que sus instituciones crezcan sanas y ordenadas.
               </p>
             </Rise>
             <Rise delay={0.1} className="bg-white p-8 md:p-12">
               <p className="folio text-primary">Visión</p>
-              <p className="mt-5 font-serif text-2xl leading-snug text-ink md:text-3xl">
+              <p className="mt-5 text-2xl leading-snug text-ink md:text-3xl font-bold">
                 Ser el aliado financiero de referencia del sector salud en República Dominicana.
               </p>
             </Rise>

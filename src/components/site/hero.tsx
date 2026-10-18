@@ -118,7 +118,7 @@ export function Hero() {
 
       {/* Cifras clave de la propuesta */}
       <div className="container-page relative mx-auto mt-20 max-w-7xl md:mt-24 md:px-8">
-        <dl className="grid grid-cols-2 border-y border-rule font-[family-name:var(--font-geist)] lg:grid-cols-4">
+        <dl className="grid grid-cols-2 border-y border-rule lg:grid-cols-4">
           {cifras.map((c, i) => (
             <motion.div
               key={c.etiqueta}
@@ -129,7 +129,7 @@ export function Hero() {
               className="flex flex-col gap-2 border-rule px-2 py-8 odd:border-r sm:px-6 lg:border-r lg:last:border-r-0"
             >
               <dt className="order-2 text-sm leading-snug text-ink-soft">{c.etiqueta}</dt>
-              <dd className="order-1 font-serif text-5xl text-ink md:text-6xl">{c.valor}</dd>
+              <dd className="order-1 text-5xl text-ink md:text-6xl font-extrabold tracking-tight">{c.valor}</dd>
             </motion.div>
           ))}
         </dl>

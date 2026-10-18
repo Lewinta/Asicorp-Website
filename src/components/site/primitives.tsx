@@ -88,7 +88,7 @@ export function SectionHead({
       </p>
       <h2
         className={cn(
-          "mt-5 text-balance font-serif text-4xl font-normal leading-[1.05] md:text-5xl lg:text-[3.5rem]",
+          "mt-5 text-balance text-3xl font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl",
           invert ? "text-white" : "text-ink",
         )}
       >
@@ -132,7 +132,7 @@ export function PageHero({
           {folio}
         </p>
         <h1
-          className="entra mt-6 max-w-5xl text-balance font-serif text-5xl font-normal leading-[1.02] text-ink md:text-7xl"
+          className="entra mt-6 max-w-5xl text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl"
           style={{ "--d": "0.08s" } as React.CSSProperties}
         >
           {title}

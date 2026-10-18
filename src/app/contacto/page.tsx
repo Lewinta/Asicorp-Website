@@ -23,7 +23,7 @@ export default function ContactoPage() {
         folio="Contacto"
         title={
           <>
-            Hablemos de <em className="text-primary">su flujo de caja</em>.
+            Hablemos de <span className="text-gradient-brand">su flujo de caja</span>.
           </>
         }
         lead="Escríbanos, llámenos o visítenos en la Av. Independencia. Le respondemos en horario laborable."

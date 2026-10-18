@@ -57,7 +57,7 @@ export function EvaluacionForm() {
         className="grid place-items-center rounded-[6px] border border-rule bg-white p-10 text-center"
       >
         <CheckCircle2 className="h-12 w-12 text-money" strokeWidth={1.5} />
-        <h3 className="mt-4 font-serif text-3xl text-ink">Su solicitud está lista</h3>
+        <h3 className="mt-4 text-3xl text-ink font-bold">Su solicitud está lista</h3>
         <p className="mt-2 max-w-sm text-ink-soft">
           Abrimos WhatsApp con sus datos. Solo tiene que pulsar enviar. Si no se abrió, use el botón.
         </p>
@@ -80,7 +80,7 @@ export function EvaluacionForm() {
     <form onSubmit={onSubmit} className="space-y-5 rounded-[6px] border border-rule bg-white p-6 md:p-10">
       <div>
         <p className="folio text-primary">Reunión de diagnóstico</p>
-        <h2 className="mt-3 font-serif text-3xl text-ink">Cuéntenos sobre su institución</h2>
+        <h2 className="mt-3 text-3xl text-ink font-bold">Cuéntenos sobre su institución</h2>
         <p className="mt-2 text-sm text-ink-soft">Sin costo ni compromiso. Le respondemos por WhatsApp o por teléfono.</p>
       </div>
 

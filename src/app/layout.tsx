@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { entidad } from "@/lib/contenido";
 import { Providers } from "@/components/providers";
@@ -12,16 +12,6 @@ const sans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-// Tipografías del sitio público (el portal sigue con Plus Jakarta Sans).
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-newsreader",
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  display: "swap",
-});
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -80,7 +70,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${sans.variable} ${newsreader.variable} ${geist.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${sans.variable} antialiased`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <Providers>
           <SiteChrome>{children}</SiteChrome>

@@ -17,7 +17,7 @@ export default function EvaluacionPage() {
         folio="Paso 1 · Reunión de diagnóstico"
         title={
           <>
-            Empecemos por conocer <em className="text-primary">su ciclo de facturación</em>.
+            Empecemos por conocer <span className="text-gradient-brand">su ciclo de facturación</span>.
           </>
         }
         lead="Sin costo, sin compromiso de permanencia y sin afectar su crédito."
@@ -26,9 +26,9 @@ export default function EvaluacionPage() {
         <ol className="space-y-6 self-start border-t border-ink pt-6">
           {proximosPasos.map((p, i) => (
             <li key={p.titulo} className="grid grid-cols-[2.5rem_1fr] gap-3">
-              <span className="font-mono text-sm text-stamp">0{i + 1}</span>
+              <span className="text-sm text-stamp font-semibold tabular">0{i + 1}</span>
               <div>
-                <p className="font-serif text-xl text-ink">{p.titulo}</p>
+                <p className="text-xl text-ink font-bold">{p.titulo}</p>
                 <p className="mt-1 text-sm text-ink-soft">{p.texto}</p>
               </div>
             </li>

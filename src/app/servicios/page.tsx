@@ -17,7 +17,7 @@ export default function ServiciosPage() {
         folio="Servicios · Cesión de crédito"
         title={
           <>
-            Auditamos, radicamos, <em className="text-primary">anticipamos</em> y cobramos su facturación a las ARS.
+            Auditamos, radicamos, <span className="text-gradient-brand">anticipamos</span> y cobramos su facturación a las ARS.
           </>
         }
         lead="Un servicio integral y mensual para clínicas, centros de diagnóstico, laboratorios y profesionales de la salud. No es un préstamo: sin garantías ni avales."

@@ -40,7 +40,7 @@ export function Simulador() {
           folio="04 / Simulador"
           title={
             <>
-              ¿Cuánto recibe <em className="text-primary">y cuándo?</em>
+              ¿Cuánto recibe <span className="text-gradient-brand">y cuándo?</span>
             </>
           }
           lead="Mueva el control con lo que factura al mes a las ARS. El cálculo usa la tarifa publicada por lote."
@@ -55,7 +55,7 @@ export function Simulador() {
                 Facturación mensual a las ARS
               </label>
               <div className="mt-4 flex items-baseline gap-3 border-b-2 border-ink pb-2">
-                <span className="font-serif text-3xl text-ink-soft">RD$</span>
+                <span className="text-3xl text-ink-soft font-bold">RD$</span>
                 <input
                   id={idInput}
                   inputMode="numeric"
@@ -66,7 +66,7 @@ export function Simulador() {
                     if (limpio) setMonto(Math.min(MAX, Math.max(MIN, Number(limpio))));
                   }}
                   onBlur={() => fijar(monto)}
-                  className="tabular w-full min-w-0 bg-transparent font-serif text-5xl text-ink outline-none md:text-6xl"
+                  className="tabular w-full min-w-0 bg-transparent text-4xl text-ink outline-none sm:text-5xl md:text-6xl font-extrabold tracking-tight"
                   aria-describedby={`${idInput}-ayuda`}
                 />
               </div>
@@ -97,7 +97,7 @@ export function Simulador() {
                     key={v}
                     type="button"
                     onClick={() => fijar(v)}
-                    className="min-h-10 rounded-[4px] border border-ink/15 px-3 font-mono text-xs text-ink transition-colors hover:border-ink hover:bg-paper aria-pressed:border-navy-deep aria-pressed:bg-navy-deep aria-pressed:text-white"
+                    className="min-h-10 rounded-[4px] border border-ink/15 px-3 text-xs text-ink transition-colors hover:border-ink hover:bg-paper aria-pressed:border-navy-deep aria-pressed:bg-navy-deep aria-pressed:text-white font-semibold tabular"
                     aria-pressed={monto === v}
                   >
                     {v >= 1_000_000 ? `RD$${v / 1_000_000}M` : `RD$${v / 1000}K`}
@@ -108,13 +108,13 @@ export function Simulador() {
               <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-rule pt-6">
                 <div>
                   <dt className="text-sm text-ink-soft">Costo del servicio por lote</dt>
-                  <dd className="tabular mt-1 font-mono text-ink">
+                  <dd className="tabular mt-1 text-ink font-semibold">
                     {rd(costoMin)} a {rd(costoMax)}
                   </dd>
                 </div>
                 <div>
                   <dt className="text-sm text-ink-soft">Cobros al año</dt>
-                  <dd className="mt-1 font-mono text-ink">
+                  <dd className="mt-1 text-ink font-semibold tabular">
                     12 <span className="text-ink-soft">en lugar de 9</span>
                   </dd>
                 </div>
@@ -126,8 +126,8 @@ export function Simulador() {
           <div className="relative flex flex-col justify-between gap-10 bg-navy-deep p-7 text-white md:p-12" aria-live="polite">
             <div>
               <p className="folio text-white/50">Usted recibe en 4 días hábiles</p>
-              <p className="tabular mt-4 font-serif text-4xl leading-tight md:text-5xl">{rd(anticipoMin)}</p>
-              <p className="tabular font-serif text-2xl text-white/50 md:text-3xl">a {rd(anticipoMax)}</p>
+              <p className="tabular mt-4 text-4xl leading-tight md:text-5xl font-extrabold tracking-tight">{rd(anticipoMin)}</p>
+              <p className="tabular text-2xl text-white/50 md:text-3xl font-bold">a {rd(anticipoMax)}</p>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
                 Total facturado del mes, menos el costo del servicio ({tarifa.porLote.min.toFixed(2)}% a{" "}
                 {tarifa.porLote.max.toFixed(2)}% por lote de hasta {tarifa.porLote.plazoDias} días).
@@ -136,7 +136,7 @@ export function Simulador() {
 
             <div className="border-t border-white/15 pt-6">
               <p className="text-sm text-white/60">Facturación que deja de esperar en la ARS el primer año</p>
-              <p className="tabular mt-1 font-mono text-2xl text-[#4ade80]">+ {rd(monto * 3)}</p>
+              <p className="tabular mt-1 text-2xl text-[#4ade80] font-semibold">+ {rd(monto * 3)}</p>
               <p className="mt-1 text-xs text-white/40">3 cobros adicionales frente al ciclo habitual.</p>
             </div>
 
