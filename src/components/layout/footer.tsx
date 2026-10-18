@@ -91,6 +91,11 @@ export function Footer() {
           <p>© {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.</p>
           <p>Soluciones financieras para el sector salud</p>
         </div>
+        <p className="pb-6 text-center text-xs text-muted-foreground">
+          <a href="https://tzcode.tech" target="_blank" rel="noopener" className="transition-colors hover:text-foreground">
+            Made with ❤️ by TZCode
+          </a>
+        </p>
       </div>
     </footer>
   );
