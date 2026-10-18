@@ -1,7 +1,7 @@
 export type LoteRow = {
   name: string;
   fecha: string;
-  estado: "Draft" | "Desembolsado" | "Cobro Parcial" | "Vencido" | "Cobrado" | "Cancelado";
+  estado: "Draft" | "Desembolsado" | "Cobro Parcial" | "Vencido" | "Cobrado" | "Cerrado" | "Cancelado";
   monto_total: number;
   neto_desembolsar: number;
   cobrado: number;
@@ -25,11 +25,22 @@ export type DeduccionRow = {
   deduccion: string; detalle: string; monto: number; tasa: number;
 };
 
+export type RecobroRow = {
+  lote_origen: string; factura_referencia: string; cliente: string;
+  tipo: string; resolucion: string; monto_glosa: number; monto_recobro: number;
+};
+
+export type DevolucionRow = { descripcion: string; monto: number };
+
+// Recobros y devoluciones son campos nuevos del endpoint: los lotes viejos pueden
+// no traerlos, así que son opcionales y la vista los trata como vacíos / 0.
 export type LoteDetail = {
   name: string; fecha: string; estado: LoteRow["estado"];
   monto_total: number; comision_monto: number; reserva_monto: number;
   impuesto_monto: number; deducciones_totales: number; neto_desembolsar: number;
   facturas: FacturaRow[]; deducciones: DeduccionRow[];
+  recobro_monto?: number; linea_conversion_monto?: number; devoluciones_totales?: number;
+  recobros?: RecobroRow[]; devoluciones?: DevolucionRow[];
 };
 
 export type PortalSession = { cedente: string; customerName: string; email: string };

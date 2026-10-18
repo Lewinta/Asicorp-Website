@@ -50,5 +50,6 @@ export const ESTADO_STYLE: Record<string, string> = {
   "Cobro Parcial": "bg-[color:var(--warning)]/15 text-[color:var(--warning)]",
   Vencido: "bg-[color:var(--danger)]/15 text-[color:var(--danger)]",
   Cobrado: "bg-primary/15 text-primary",
+  Cerrado: "bg-[color:var(--success)]/15 text-[color:var(--success)]",
   Cancelado: "bg-muted text-muted-foreground line-through",
 };

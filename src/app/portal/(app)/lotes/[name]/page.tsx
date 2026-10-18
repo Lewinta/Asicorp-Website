@@ -16,11 +16,27 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
   // salvo que alguna factura del lote la traiga con valor.
   const showCobradoCedente = d.facturas.some((f) => (f.cobrado_por_cedente ?? 0) > 0);
 
+  // El endpoint no envía la tasa del impuesto; se deriva del monto (hoy 0.2% del
+  // monto total) para que el cedente vea el porcentaje aplicado.
+  const impuestoTasa = d.monto_total > 0 && d.impuesto_monto > 0
+    ? (d.impuesto_monto / d.monto_total) * 100 : 0;
+  const impuestoLabel = impuestoTasa > 0
+    ? `Impuesto (${new Intl.NumberFormat("es-DO", { maximumFractionDigits: 2 }).format(impuestoTasa)}%)`
+    : "Impuesto";
+
   const totales = [
     ["Monto total", d.monto_total], ["Comisión", d.comision_monto],
-    ["Reserva", d.reserva_monto], ["Impuesto", d.impuesto_monto],
+    ["Reserva", d.reserva_monto], [impuestoLabel, d.impuesto_monto],
     ["Deducciones", d.deducciones_totales],
   ] as const;
+
+  // Lotes viejos no traen recobros/devoluciones: se tratan como listas vacías y 0.
+  const recobros = d.recobros ?? [];
+  const devoluciones = d.devoluciones ?? [];
+  const recobroMonto = d.recobro_monto ?? 0;
+  const lineaConversionMonto = d.linea_conversion_monto ?? 0;
+  // Las devoluciones suman al neto (a favor del cedente); neto_desembolsar ya las incluye.
+  const devolucionesTotales = d.devoluciones_totales ?? 0;
 
   return (
     <div className="space-y-6">
@@ -48,6 +64,12 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
                 <dd className="font-medium">{money(val as number)}</dd>
               </div>
             ))}
+            <div className="flex justify-between">
+              <dt className="text-muted-foreground">Devoluciones</dt>
+              <dd className={`font-medium ${devolucionesTotales > 0 ? "text-[color:var(--success)]" : ""}`}>
+                +{money(devolucionesTotales)}
+              </dd>
+            </div>
           </dl>
         </div>
       </div>
@@ -106,6 +128,78 @@ export default async function LoteDetailPage({ params }: { params: Promise<{ nam
                   </tr>
                 ))}
               </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {devoluciones.length > 0 && (
+        <section>
+          <h2 className="mb-3 font-display text-lg font-bold text-foreground">Devoluciones</h2>
+          <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+            <table className="w-full min-w-[480px] text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
+                  <th className="px-4 py-3">Descripción</th>
+                  <th className="px-4 py-3 text-right">Monto</th>
+                </tr>
+              </thead>
+              <tbody>
+                {devoluciones.map((x, idx) => (
+                  <tr key={idx} className="border-b border-border/60 last:border-0">
+                    <td className="px-4 py-3 font-medium">{x.descripcion || "—"}</td>
+                    <td className="px-4 py-3 text-right">{money(x.monto)}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="border-t border-border">
+                  <td className="px-4 py-3 font-semibold">Total devuelto al cedente</td>
+                  <td className="px-4 py-3 text-right font-semibold text-[color:var(--success)]">{money(devolucionesTotales)}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {recobros.length > 0 && (
+        <section>
+          <h2 className="mb-3 font-display text-lg font-bold text-foreground">Recobros de lotes anteriores</h2>
+          <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+            <table className="w-full min-w-[760px] text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
+                  <th className="px-4 py-3">Lote origen</th><th className="px-4 py-3">Factura</th>
+                  <th className="px-4 py-3">Cliente</th><th className="px-4 py-3">Tipo</th>
+                  <th className="px-4 py-3">Resolución</th>
+                  <th className="px-4 py-3 text-right">Monto</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recobros.map((r, idx) => (
+                  <tr key={idx} className="border-b border-border/60 last:border-0">
+                    <td className="px-4 py-3 font-medium">{r.lote_origen || "—"}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{r.factura_referencia || "—"}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{r.cliente || "—"}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{r.tipo || "—"}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{r.resolucion || "—"}</td>
+                    <td className="px-4 py-3 text-right">{money(r.monto_recobro)}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="border-t border-border">
+                  <td colSpan={5} className="px-4 py-3 font-semibold">Descontado del desembolso</td>
+                  <td className="px-4 py-3 text-right font-semibold">{money(recobroMonto)}</td>
+                </tr>
+                {lineaConversionMonto > 0 && (
+                  <tr>
+                    <td colSpan={5} className="px-4 pb-3 font-semibold">Pasado a Línea de Crédito</td>
+                    <td className="px-4 pb-3 text-right font-semibold">{money(lineaConversionMonto)}</td>
+                  </tr>
+                )}
+              </tfoot>
             </table>
           </div>
         </section>
