@@ -1,172 +1,101 @@
 import type { Metadata } from "next";
-import { Eye, HeartHandshake, Lightbulb, Lock, Target, Zap } from "lucide-react";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
-import { SnapSection } from "@/components/motion/snap-section";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { cifras, clientesObjetivo } from "@/lib/contenido";
+import { PageHero, Rise, SectionHead, Sello } from "@/components/site/primitives";
+import { Cierre } from "@/components/site/secciones";
 
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Asicorp es el aliado financiero especializado en el sector salud de República Dominicana. Conoce nuestra misión, visión y valores.",
+    "ASICORP (Asesores e Interventores Corporativos, S.R.L.): profesionales con amplia trayectoria en el sector financiero, las ARS y el Sistema Dominicano de Seguridad Social.",
+  alternates: { canonical: "/nosotros" },
 };
-
-const valores = [
-  { icon: Lock, title: "Confianza", desc: "Procesos claros y transparentes en cada operación." },
-  { icon: Zap, title: "Agilidad", desc: "Respuestas rápidas: tu liquidez no puede esperar." },
-  { icon: HeartHandshake, title: "Cercanía", desc: "Te acompañamos con un trato humano y especializado." },
-  { icon: Lightbulb, title: "Innovación", desc: "Tecnología y procesos digitales para hacerte la vida fácil." },
-];
-
-const diferenciadores = [
-  "Especialistas únicamente en el sector salud y el cobro a las ARS.",
-  "Oferta integral: factoring, facturación, contabilidad y gestión tributaria.",
-  "Proceso 100% digital, ágil y transparente.",
-  "Acompañamiento de largo plazo, no una transacción aislada.",
-];
 
 export default function NosotrosPage() {
   return (
-    <div className="pb-24">
-      {/* Hero */}
-      <SnapSection>
-        <section className="relative overflow-hidden pt-32 md:pt-40">
-          <div className="pointer-events-none absolute inset-0 line-texture opacity-40" />
-          <div className="pointer-events-none absolute -right-32 top-10 h-80 w-80 rounded-full bg-[radial-gradient(circle,var(--brand-blue)_0%,transparent_65%)] opacity-15 blur-3xl" />
-          <div className="container-page relative z-10 mx-auto max-w-4xl px-5 text-center md:px-8">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-              Nosotros
-            </span>
-            <h1 className="mt-4 text-4xl font-bold leading-tight text-foreground sm:text-6xl">
-              Financiamos la salud de{" "}
-              <span className="text-gradient-brand">República Dominicana</span>
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-muted-foreground">
-              Asicorp nació para resolver un problema real: los profesionales y empresas
-              de salud esperan meses para cobrar a las ARS. Nosotros convertimos esa
-              espera en liquidez inmediata.
-            </p>
-          </div>
-        </section>
-      </SnapSection>
+    <>
+      <PageHero
+        folio="Nosotros · Asesores e Interventores Corporativos, S.R.L."
+        title={
+          <>
+            Conocemos las ARS <em className="text-primary">desde adentro</em>.
+          </>
+        }
+        lead="Somos profesionales con amplia trayectoria en el sector financiero, las ARS y el Sistema Dominicano de Seguridad Social."
+      />
 
-      {/* Quiénes somos */}
-      <SnapSection>
-        <section className="container-page mx-auto mt-16 max-w-5xl px-5 md:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <Reveal>
-              <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-                Quiénes somos
-              </span>
-              <h2 className="mt-3 text-3xl font-bold text-foreground sm:text-4xl">
-                Especialistas financieros del sector salud
-              </h2>
-              <div className="mt-4 space-y-4 text-muted-foreground">
-                <p>
-                  Combinamos experiencia financiera con un conocimiento profundo del
-                  sector salud dominicano y del proceso de cobro a las aseguradoras.
-                </p>
-                <p>
-                  Más allá de adelantarte el dinero de tus facturas, nos convertimos en el aliado integral
-                  que ordena tus finanzas, cumple tus obligaciones y te acompaña a
-                  crecer con tranquilidad.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
-                <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(135deg, var(--brand-navy), var(--brand-blue))" }}
-                />
-                <div className="absolute inset-0 grid-texture opacity-20" />
-                <div className="absolute inset-0 grid place-items-center p-8 text-center text-white">
-                  <div>
-                    <p className="font-display text-5xl font-extrabold">24–72h</p>
-                    <p className="mt-2 text-white/80">de tu factura a tu cuenta</p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </SnapSection>
+      <section className="bg-white py-24 md:py-32">
+        <div className="container-page mx-auto grid max-w-7xl items-center gap-14 md:px-8 lg:grid-cols-2 lg:gap-20">
+          <Rise className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[6px]">
+              <Image
+                src="/brand/oficina-asicorp.webp"
+                alt="Fachada de la oficina de ASICORP en la Av. Independencia 603, Santo Domingo"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-[50%_18%]"
+                priority
+              />
+            </div>
+            <div className="absolute -bottom-5 -right-3 md:-right-6">
+              <Sello tono="azul" rotate={-7}>Santo Domingo, D.N.</Sello>
+            </div>
+          </Rise>
 
-      {/* Misión y Visión */}
-      <SnapSection>
-        <section className="container-page mx-auto mt-20 max-w-5xl px-5 md:px-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            <Reveal className="h-full">
-              <div className="flex h-full flex-col rounded-3xl border border-border bg-card p-8">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary">
-                  <Target className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 text-2xl font-bold text-foreground">Misión</h3>
-                <p className="mt-3 text-muted-foreground">
-                  Brindar liquidez y soluciones financieras integrales al sector salud,
-                  con agilidad y transparencia, para que sus profesionales y empresas
-                  crezcan sanos y ordenados.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1} className="h-full">
-              <div className="flex h-full flex-col rounded-3xl border border-border bg-card p-8">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent/15 text-accent">
-                  <Eye className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 text-2xl font-bold text-foreground">Visión</h3>
-                <p className="mt-3 text-muted-foreground">
-                  Ser el aliado financiero de referencia del sector salud en República
-                  Dominicana, reconocido por su especialización, cercanía e innovación.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </SnapSection>
-
-      {/* Valores */}
-      <SnapSection>
-        <section className="container-page mx-auto mt-20 max-w-6xl px-5 md:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Nuestros valores</h2>
-          </div>
-          <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {valores.map((v) => (
-              <StaggerItem key={v.title}>
-                <div className="h-full rounded-3xl border border-border bg-card p-6 text-center">
-                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary">
-                    <v.icon className="h-7 w-7" />
-                  </span>
-                  <h3 className="mt-4 font-semibold text-foreground">{v.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </section>
-      </SnapSection>
-
-      {/* Por qué elegirnos */}
-      <SnapSection>
-        <section className="container-page mx-auto mt-20 max-w-5xl px-5 md:px-8">
-          <Reveal>
-            <div className="rounded-[2rem] bg-secondary p-8 text-white md:p-12">
-              <h2 className="text-3xl font-bold sm:text-4xl">¿Por qué elegir a Asicorp?</h2>
-              <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-                {diferenciadores.map((d) => (
-                  <li key={d} className="flex items-start gap-3 text-sm text-white/90">
-                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" />
-                    {d}
+          <div>
+            <SectionHead
+              folio="Quiénes somos"
+              title={
+                <>
+                  Fortalecemos la operación y el <em className="text-primary">flujo de caja</em> de las instituciones de salud.
+                </>
+              }
+              lead="Sin préstamos, garantías ni avales. Cada mes auditamos su facturación, la radicamos ante las ARS, le anticipamos el total facturado y nos encargamos del cobro y la conciliación, con un software especializado desarrollado para el mercado local."
+            />
+            <Rise delay={0.1}>
+              <p className="folio mt-10 text-ink-soft">Trabajamos con</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {clientesObjetivo.map((c) => (
+                  <li key={c} className="rounded-[4px] border border-rule bg-paper px-3 py-2 text-sm text-ink">
+                    {c}
                   </li>
                 ))}
               </ul>
-              <Button href="/evaluacion" variant="accent" size="lg" className="mt-8">
-                Solicita tu evaluación gratuita
-              </Button>
-            </div>
-          </Reveal>
-        </section>
-      </SnapSection>
-    </div>
+            </Rise>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 md:py-32">
+        <div className="container-page mx-auto max-w-7xl md:px-8">
+          <dl className="grid grid-cols-2 border-y border-rule lg:grid-cols-4">
+            {cifras.map((c) => (
+              <div key={c.etiqueta} className="flex flex-col gap-2 border-rule px-2 py-10 odd:border-r sm:px-6 lg:border-r lg:last:border-r-0">
+                <dt className="order-2 text-sm text-ink-soft">{c.etiqueta}</dt>
+                <dd className="order-1 font-serif text-6xl text-ink">{c.valor}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="mt-24 grid gap-px overflow-hidden rounded-[6px] border border-rule bg-rule md:grid-cols-2">
+            <Rise className="bg-white p-8 md:p-12">
+              <p className="folio text-primary">Misión</p>
+              <p className="mt-5 font-serif text-2xl leading-snug text-ink md:text-3xl">
+                Brindar liquidez y soluciones financieras integrales al sector salud, con agilidad y transparencia,
+                para que sus instituciones crezcan sanas y ordenadas.
+              </p>
+            </Rise>
+            <Rise delay={0.1} className="bg-white p-8 md:p-12">
+              <p className="folio text-primary">Visión</p>
+              <p className="mt-5 font-serif text-2xl leading-snug text-ink md:text-3xl">
+                Ser el aliado financiero de referencia del sector salud en República Dominicana.
+              </p>
+            </Rise>
+          </div>
+        </div>
+      </section>
+
+      <Cierre />
+    </>
   );
 }

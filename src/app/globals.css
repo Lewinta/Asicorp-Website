@@ -39,6 +39,16 @@
   --brand-ink: #3e3e40;
   --brand-tint: #dce6f6;
 
+  /* Sitio público: concepto "expediente radicado" */
+  --paper: #f4f6fa;
+  --paper-deep: #e9edf4;
+  --ink: #0f1b2e;
+  --ink-soft: #4a5568;
+  --navy-deep: #0f2350;
+  --rule: #d5dce8;
+  --stamp: #b4372f;
+  --money: #13834a;
+
   --radius: 0.75rem;
 
   color-scheme: light;
@@ -72,6 +82,18 @@
 
   --font-display: var(--font-sans);
   --font-sans: var(--font-sans);
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-navy-deep: var(--navy-deep);
+  --color-rule: var(--rule);
+  --color-stamp: var(--stamp);
+  --color-money: var(--money);
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 0.15rem);
@@ -209,6 +231,113 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-float-slow {
+    animation: none;
+  }
+}
+
+/* ================= Sitio público: expediente radicado ================= */
+
+.site-public {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  /* los sellos entran escalados: que nunca ensanchen la página en móvil */
+  overflow-x: clip;
+}
+.site-public h1,
+.site-public h2,
+.site-public h3 {
+  letter-spacing: -0.015em;
+}
+
+/* Renglones de libro mayor */
+@utility ledger {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    color-mix(in srgb, var(--brand-blue) 9%, transparent) 31px,
+    color-mix(in srgb, var(--brand-blue) 9%, transparent) 32px
+  );
+}
+
+/* Papel con grano muy leve */
+@utility paper-grain {
+  background-image:
+    radial-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 0.6px, transparent 0.6px);
+  background-size: 5px 5px;
+}
+
+/* Etiqueta de sección en monoespaciada */
+@utility folio {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Sello de goma */
+.sello {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stamp);
+  border: 2px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 4px;
+  padding: 0.35em 0.8em;
+  mix-blend-mode: multiply;
+  /* tinta irregular */
+  -webkit-mask-image: radial-gradient(circle at 30% 40%, #000 55%, rgb(0 0 0 / 0.78) 75%, #000 100%);
+  mask-image: radial-gradient(circle at 30% 40%, #000 55%, rgb(0 0 0 / 0.78) 75%, #000 100%);
+}
+.sello--azul {
+  color: var(--brand-blue);
+}
+.sello--verde {
+  color: var(--money);
+}
+
+/* Celdas del calendario de cobros */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, white 16%, transparent) 0 1px,
+    transparent 1px 7px
+  );
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Acordeón de preguntas */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary {
+  list-style: none;
+}
+
+/* Entrada del hero: CSS puro para que el titular no dependa de la hidratación */
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.entra {
+  animation: entra 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .entra {
     animation: none;
   }
 }

@@ -13,6 +13,8 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "connect-src 'self'",
+  // Mapa de la oficina en /contacto
+  "frame-src https://maps.google.com https://www.google.com",
 ].join("; ");
 
 const securityHeaders = [

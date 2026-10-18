@@ -2,133 +2,164 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle2, MessageCircle } from "lucide-react";
+import { siteConfig, whatsappUrl } from "@/lib/site";
 
 const inputCls =
-  "h-11 w-full rounded-xl border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-primary/50 focus:ring-2 focus:ring-ring/30";
+  "h-12 w-full rounded-[4px] border border-rule bg-white px-3 text-base text-ink outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 const tiposEntidad = [
-  "Médico independiente",
   "Clínica",
-  "Laboratorio clínico",
-  "Centro de imágenes",
-  "Centro diagnóstico",
-  "Hospital",
-  "Empresa de salud",
+  "Centro de diagnóstico",
+  "Laboratorio",
+  "Profesional de la salud",
   "Otro",
 ];
 
 const rangosFacturacion = [
-  "Menos de RD$100,000 / mes",
-  "RD$100,000 – RD$500,000 / mes",
-  "RD$500,000 – RD$1,000,000 / mes",
-  "RD$1,000,000 – RD$3,000,000 / mes",
-  "Más de RD$3,000,000 / mes",
+  "Menos de RD$500,000 / mes",
+  "RD$500,000 a RD$1,000,000 / mes",
+  "RD$1,000,000 a RD$3,000,000 / mes",
+  "RD$3,000,000 a RD$10,000,000 / mes",
+  "Más de RD$10,000,000 / mes",
 ];
 
+/**
+ * Solicitud de reunión de diagnóstico. El sitio no guarda datos: al enviar se abre
+ * WhatsApp con la solicitud ya redactada para el equipo de ASICORP.
+ */
 export function EvaluacionForm() {
-  const [enviado, setEnviado] = useState(false);
+  const [url, setUrl] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setEnviado(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const f = new FormData(e.currentTarget);
+    const v = (k: string) => String(f.get(k) ?? "").trim();
+    const lineas = [
+      "Hola ASICORP, quiero agendar una reunión de diagnóstico.",
+      `Nombre: ${v("nombre")}`,
+      `Institución: ${v("institucion")} (${v("tipo")})`,
+      `Facturación a las ARS: ${v("facturacion")}`,
+      `Teléfono: ${v("telefono")}`,
+      v("correo") && `Correo: ${v("correo")}`,
+      v("mensaje") && `Comentario: ${v("mensaje")}`,
+    ].filter(Boolean);
+    const destino = whatsappUrl(lineas.join("\n"));
+    setUrl(destino);
+    window.open(destino, "_blank", "noopener,noreferrer");
   }
 
-  if (enviado) {
+  if (url) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid place-items-center rounded-3xl border border-border bg-card p-10 text-center"
+        className="grid place-items-center rounded-[6px] border border-rule bg-white p-10 text-center"
       >
-        <div className="grid h-16 w-16 place-items-center rounded-full bg-success/15">
-          <CheckCircle2 className="h-9 w-9 text-success" />
-        </div>
-        <h3 className="mt-4 font-display text-xl font-bold text-foreground">
-          ¡Solicitud recibida!
-        </h3>
-        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Gracias por tu interés. Uno de nuestros representantes te contactará a la
-          brevedad para darte seguimiento a tu evaluación gratuita.
+        <CheckCircle2 className="h-12 w-12 text-money" strokeWidth={1.5} />
+        <h3 className="mt-4 font-serif text-3xl text-ink">Su solicitud está lista</h3>
+        <p className="mt-2 max-w-sm text-ink-soft">
+          Abrimos WhatsApp con sus datos. Solo tiene que pulsar enviar. Si no se abrió, use el botón.
         </p>
-        <Button variant="outline" className="mt-5" onClick={() => setEnviado(false)}>
-          Enviar otra solicitud
-        </Button>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-[4px] bg-navy-deep px-6 text-white hover:bg-primary"
+        >
+          <MessageCircle className="h-4 w-4" /> Abrir WhatsApp
+        </a>
+        <button type="button" onClick={() => setUrl(null)} className="mt-4 text-sm text-ink-soft underline-offset-4 hover:underline">
+          Editar la solicitud
+        </button>
       </motion.div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-border bg-card p-6 md:p-8">
+    <form onSubmit={onSubmit} className="space-y-5 rounded-[6px] border border-rule bg-white p-6 md:p-10">
       <div>
-        <h2 className="font-display text-xl font-bold text-foreground">
-          Solicita tu evaluación gratuita
-        </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Cuéntanos cuánto facturas y cómo contactarte. Es gratis y sin compromiso.
-        </p>
+        <p className="folio text-primary">Reunión de diagnóstico</p>
+        <h2 className="mt-3 font-serif text-3xl text-ink">Cuéntenos sobre su institución</h2>
+        <p className="mt-2 text-sm text-ink-soft">Sin costo ni compromiso. Le respondemos por WhatsApp o por teléfono.</p>
       </div>
 
-      <p className="pt-1 text-sm font-semibold text-foreground">Información de contacto</p>
       <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className="mb-1.5 block text-sm font-medium">Nombre completo</label>
-          <input required className={inputCls} />
-        </div>
-        <div>
-          <label className="mb-1.5 block text-sm font-medium">Tipo de entidad</label>
-          <select required defaultValue="" className={inputCls}>
-            <option value="" disabled>Selecciona</option>
+        <Campo label="Nombre completo" htmlFor="ev-nombre">
+          <input id="ev-nombre" name="nombre" required autoComplete="name" className={inputCls} />
+        </Campo>
+        <Campo label="Institución" htmlFor="ev-institucion">
+          <input id="ev-institucion" name="institucion" required autoComplete="organization" className={inputCls} />
+        </Campo>
+        <Campo label="Tipo de institución" htmlFor="ev-tipo">
+          <select id="ev-tipo" name="tipo" required defaultValue="" className={inputCls}>
+            <option value="" disabled>Seleccione</option>
             {tiposEntidad.map((t) => (
               <option key={t} value={t}>{t}</option>
             ))}
           </select>
-        </div>
-        <div>
-          <label className="mb-1.5 block text-sm font-medium">Correo electrónico</label>
-          <input required type="email" className={inputCls} />
-        </div>
-        <div>
-          <label className="mb-1.5 block text-sm font-medium">Teléfono</label>
-          <input required type="tel" className={inputCls} placeholder="(809) 000-0000" />
-        </div>
-      </div>
-
-      <p className="pt-2 text-sm font-semibold text-foreground">Información de facturación</p>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium">
-            ¿Cuánto facturas actualmente a las ARS?
-          </label>
-          <select required defaultValue="" className={inputCls}>
-            <option value="" disabled>Selecciona un rango</option>
+        </Campo>
+        <Campo label="Facturación mensual a las ARS" htmlFor="ev-facturacion">
+          <select id="ev-facturacion" name="facturacion" required defaultValue="" className={inputCls}>
+            <option value="" disabled>Seleccione un rango</option>
             {rangosFacturacion.map((r) => (
               <option key={r} value={r}>{r}</option>
             ))}
           </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium">
-            Mensaje (opcional)
-          </label>
+        </Campo>
+        <Campo label="Teléfono" htmlFor="ev-telefono">
+          <input id="ev-telefono" name="telefono" required type="tel" autoComplete="tel" className={inputCls} placeholder="(809) 000-0000" />
+        </Campo>
+        <Campo label="Correo (opcional)" htmlFor="ev-correo">
+          <input id="ev-correo" name="correo" type="email" autoComplete="email" className={inputCls} />
+        </Campo>
+        <Campo label="Comentario (opcional)" htmlFor="ev-mensaje" className="sm:col-span-2">
           <textarea
+            id="ev-mensaje"
+            name="mensaje"
             rows={3}
-            className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary/50 focus:ring-2 focus:ring-ring/30"
-            placeholder="Cuéntanos sobre tu necesidad de liquidez"
+            maxLength={600}
+            className="w-full rounded-[4px] border border-rule bg-white px-3 py-2.5 text-base text-ink outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
-        </div>
+        </Campo>
       </div>
 
-      <div className="flex flex-col items-center gap-3 pt-2">
-        <Button type="submit" size="lg" className="w-full sm:w-auto">
-          Solicitar evaluación gratuita
-        </Button>
-        <p className="text-center text-xs text-muted-foreground">
-          Tus datos se usan únicamente para darte seguimiento comercial.
+      <div className="flex flex-col gap-3 border-t border-rule pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-ink-soft">
+          También puede llamarnos al{" "}
+          <a href={`tel:+1${siteConfig.contact.phone.replace(/\D/g, "")}`} className="text-ink underline-offset-4 hover:underline">
+            {siteConfig.contact.phone}
+          </a>
+          .
         </p>
+        <button
+          type="submit"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-navy-deep px-6 font-medium text-white transition-colors hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        >
+          <MessageCircle className="h-4 w-4" /> Enviar por WhatsApp
+        </button>
       </div>
     </form>
+  );
+}
+
+function Campo({
+  label,
+  htmlFor,
+  children,
+  className,
+}: {
+  label: string;
+  htmlFor: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-ink">
+        {label}
+      </label>
+      {children}
+    </div>
   );
 }

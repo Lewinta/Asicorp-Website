@@ -1,42 +1,47 @@
-import { HeroFoto } from "@/components/home/hero-foto";
-import { TrustBand } from "@/components/home/trust-band";
-import { EjemploReal } from "@/components/home/ejemplo-real";
+import { Hero } from "@/components/site/hero";
+import { Simulador } from "@/components/site/simulador";
 import {
-  Benefits,
-  CTASection,
-  ComoFunciona,
-  PorQueAsicorp,
-  Sectores,
-  StatsBand,
-} from "@/components/home/sections";
-import { SnapSection } from "@/components/motion/snap-section";
+  Beneficios,
+  Ciclo,
+  Cierre,
+  Complementarios,
+  Desafio,
+  Impacto,
+  Inversion,
+  Preguntas,
+  ProximosPasos,
+} from "@/components/site/secciones";
+import { preguntas } from "@/lib/contenido";
+
+// Preguntas frecuentes en JSON-LD para Google y motores de respuesta.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: preguntas.map((p) => ({
+    "@type": "Question",
+    name: p.q,
+    acceptedAnswer: { "@type": "Answer", text: p.a },
+  })),
+};
 
 export default function Home() {
   return (
     <>
-      <SnapSection>
-        <HeroFoto />
-        <TrustBand />
-      </SnapSection>
-      <SnapSection>
-        <EjemploReal />
-        <StatsBand />
-      </SnapSection>
-      <SnapSection>
-        <Benefits />
-      </SnapSection>
-      <SnapSection>
-        <Sectores />
-      </SnapSection>
-      <SnapSection>
-        <ComoFunciona />
-      </SnapSection>
-      <SnapSection>
-        <PorQueAsicorp />
-      </SnapSection>
-      <SnapSection>
-        <CTASection />
-      </SnapSection>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <Hero />
+      <Desafio />
+      <Ciclo />
+      <Impacto />
+      <Simulador />
+      <Beneficios />
+      <Complementarios />
+      <Inversion />
+      <ProximosPasos />
+      <Preguntas />
+      <Cierre />
     </>
   );
 }

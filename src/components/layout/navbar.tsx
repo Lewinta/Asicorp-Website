@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { mainNav } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -33,7 +32,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 bg-transparent transition-all duration-500",
         scrolled
-          ? "border-b border-border/70 bg-background/95 backdrop-blur-md py-2"
+          ? "border-b border-rule bg-paper/90 backdrop-blur-md py-2"
           : "border-b border-transparent py-4",
       )}
     >
@@ -41,7 +40,6 @@ export function Navbar() {
         <Link
           href="/"
           aria-label="ASICORP inicio"
-          className={cn(pathname === "/" && "max-sm:hidden")}
         >
           <Logo compact={scrolled} />
         </Link>
@@ -58,6 +56,10 @@ export function Navbar() {
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
+                    type="button"
+                    aria-expanded={openDropdown === item.href}
+                    onClick={() => setOpenDropdown(item.href)}
+                    onKeyDown={(e) => e.key === "Escape" && setOpenDropdown(null)}
                     className={cn(
                       "flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
                       active && "text-primary",
@@ -122,12 +124,16 @@ export function Navbar() {
           >
             Acceso cedentes
           </Link>
-          <Button href="/evaluacion" size="sm" className="hidden sm:inline-flex">
-            Evaluación gratuita
-          </Button>
+          <Link
+            href="/evaluacion"
+            className="hidden min-h-10 items-center rounded-[4px] bg-navy-deep px-4 text-sm font-medium text-white transition-colors hover:bg-primary sm:inline-flex"
+          >
+            Agendar diagnóstico
+          </Link>
           <button
             onClick={() => setOpen((v) => !v)}
-            aria-label="Menú"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={open}
             className="grid h-10 w-10 place-items-center rounded-full text-foreground lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -177,9 +183,12 @@ export function Navbar() {
                 >
                   Acceso cedentes
                 </Link>
-                <Button href="/evaluacion" className="w-full">
-                  Evaluación gratuita
-                </Button>
+                <Link
+                  href="/evaluacion"
+                  className="flex min-h-12 w-full items-center justify-center rounded-[4px] bg-navy-deep text-base font-medium text-white"
+                >
+                  Agendar diagnóstico
+                </Link>
               </div>
             </div>
           </motion.div>

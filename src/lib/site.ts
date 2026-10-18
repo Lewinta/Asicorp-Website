@@ -14,17 +14,17 @@ export const PLACEHOLDER = {
 
 export const siteConfig = {
   name: "ASICORP",
-  legalName: "Asicorp",
+  legalName: "Asesores e Interventores Corporativos, S.R.L.",
   tagline: "Liquidez inmediata para el sector salud",
   description:
-    "Asicorp convierte tus cuentas por cobrar a las ARS en liquidez inmediata. Factoring, facturación electrónica, contabilidad y gestión tributaria para el sector salud en República Dominicana.",
+    "ASICORP anticipa en 4 días hábiles el total facturado a las ARS por clínicas, centros de diagnóstico, laboratorios y profesionales de la salud en República Dominicana. Auditoría forense, radicación, anticipo y cobranza, sin préstamos, garantías ni avales.",
   city: "Santo Domingo, República Dominicana",
   url: "https://asicorprd.com",
   contact: {
-    phone: "(809) 979-5810",
-    whatsapp: "18099795810",
+    phone: "(809) 769-5810",
+    whatsapp: "18097695810",
     email: "info@asicorprd.com",
-    address: "Av. Independencia 603, Santo Domingo",
+    address: "Av. Independencia 603, suite B3-B4, Santo Domingo, D.N.",
     hours: "Lunes a Viernes, 8:00 AM a 5:00 PM",
   },
   social: {
@@ -46,20 +46,17 @@ export const mainNav: NavItem[] = [
     label: "Servicios",
     href: "/servicios",
     children: [
-      { label: "Factoring de salud", href: "/servicios#factoring", description: "Liquidez por tus cuentas por cobrar" },
-      { label: "Facturación electrónica", href: "/servicios#facturacion", description: "Cumple con la DGII sin complicarte" },
-      { label: "Contabilidad", href: "/servicios#contabilidad", description: "Tu contabilidad al día y ordenada" },
-      { label: "Gestión tributaria", href: "/servicios#tributaria", description: "Impuestos y obligaciones bajo control" },
+      { label: "Cesión de crédito", href: "/servicios#cesion", description: "Auditoría, radicación, anticipo y cobranza" },
+      { label: "Servicios complementarios", href: "/servicios#complementarios", description: "Costos, negociación tarifaria y auditoría médica" },
+      { label: "Inversión", href: "/servicios#inversion", description: "Tarifa publicada y qué incluye" },
     ],
   },
-  { label: "Cómo funciona", href: "/#como-funciona" },
+  { label: "Cómo funciona", href: "/#ciclo" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Contacto", href: "/contacto" },
 ];
 
-export const stats = [
-  { value: 72, prefix: "", suffix: "h", label: "Liquidez máxima" },
-  { value: 100, prefix: "", suffix: "%", label: "Proceso digital" },
-  { value: 7, prefix: "+", suffix: "", label: "Servicios integrados" },
-  { value: 15, prefix: "+", suffix: " años", label: "En finanzas y salud" },
-];
+/** Enlace de WhatsApp con mensaje prellenado. */
+export function whatsappUrl(mensaje: string) {
+  return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+}
