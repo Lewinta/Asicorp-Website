@@ -95,7 +95,9 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <Cierre />
+      <Cierre
+        imagen={{ src: "/brand/medicos-revision.webp", alt: "Médicos revisando información en una tableta" }}
+      />
     </>
   );
 }

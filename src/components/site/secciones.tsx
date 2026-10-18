@@ -522,7 +522,13 @@ export function Preguntas({ num = "09" }: { num?: string }) {
 
 /* ------------------------------ Cierre y contacto ------------------------------ */
 
-export function Cierre() {
+const oficina = {
+  src: "/brand/oficina-asicorp.webp",
+  alt: "Fachada de la oficina de ASICORP en la Av. Independencia 603, Santo Domingo",
+  position: "object-[50%_18%]",
+};
+
+export function Cierre({ imagen = oficina }: { imagen?: { src: string; alt: string; position?: string } }) {
   const c = siteConfig.contact;
   return (
     <section className="container-page mx-auto max-w-7xl pb-8 md:px-8">
@@ -574,11 +580,11 @@ export function Cierre() {
 
           <div className="relative min-h-72 lg:min-h-full">
             <Image
-              src="/brand/oficina-asicorp.webp"
-              alt="Fachada de la oficina de ASICORP en la Av. Independencia 603, Santo Domingo"
+              src={imagen.src}
+              alt={imagen.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover object-[50%_18%]"
+              className={cn("object-cover", imagen.position)}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/10 to-transparent max-lg:bg-gradient-to-b" />
           </div>
